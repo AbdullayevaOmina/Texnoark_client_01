@@ -20,3 +20,10 @@ export interface Product {
   product_name: string;
   size: [string];
 }
+
+export interface ProductStoreState {
+  data: Product[];
+  isLoading: boolean;
+  totalCount: number;
+  getAll: (params: GetAll) => Promise<void>;
+}

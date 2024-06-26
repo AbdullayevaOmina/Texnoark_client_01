@@ -3,7 +3,7 @@ import { login } from "@/service/auth.service";
 import { SignIn } from "@/types/auth-types";
 import { schemaSignin } from "@/validations";
 import { useMask } from "@react-input/mask";
-import { Card, Input, Spin } from "antd";
+import { Card, Input } from "antd";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,7 @@ const SignInPage = () => {
   });
 
   const initialValues: SignIn = {
-    phone_number: "",
+    phone_number: "+998 (99) 359-07-26",
     password: "Ominaweb12@",
   };
 
@@ -73,7 +73,7 @@ const SignInPage = () => {
               </div>
 
               <div className="flex justify-between mb-4">
-                <small className="dark:text-gray-300 ">
+                <small className="dark:text-gray-400 ">
                   Sizda hisob yo'qmi?
                 </small>
                 <Link href="/signup" className="text-[13px] text-sky-500">
@@ -85,7 +85,8 @@ const SignInPage = () => {
                 type="submit"
                 className="w-full bg-[#D55200] rounded-lg text-white py-1"
               >
-                {isSubmitting ? <Spin /> : "Submit"}
+                {/* {isSubmitting ? <Spin /> : "Submit"} */}
+                {isSubmitting ? "Yuborilmoqda" : "Yuborish"}
               </button>
             </Form>
           )}

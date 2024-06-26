@@ -3,7 +3,7 @@ import { login, register } from "@/service/auth.service";
 import { SignUp } from "@/types/auth-types";
 import { schemaSignup } from "@/validations";
 import { useMask } from "@react-input/mask";
-import { Card, Input, Spin } from "antd";
+import { Card, Input } from "antd";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -122,8 +122,8 @@ const SignUpPage = () => {
               </div>
 
               <div className="flex justify-between mb-4">
-                <small className="dark:text-gray-300 ">
-                  Sizda allqachin hisob bormi?
+                <small className="dark:text-gray-400 ">
+                  Sizda allqachon hisob bormi?
                 </small>
                 <Link href="/signin" className="text-[13px] text-sky-500">
                   Tizimga kirish
@@ -134,7 +134,8 @@ const SignUpPage = () => {
                 type="submit"
                 className="w-full bg-[#D55200] rounded-lg text-white py-1"
               >
-                {isSubmitting ? <Spin /> : "Submit"}
+                {/* {isSubmitting ? <Spin /> : "Submit"} */}
+                {isSubmitting ? "Yuborilmoqda" : "Yuborish"}
               </button>
             </Form>
           )}

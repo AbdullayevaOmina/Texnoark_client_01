@@ -1,13 +1,6 @@
 import http from "@/api/interceptors";
-import { GetAll, Product } from "@/types/product-types";
+import { GetAll, ProductStoreState } from "@/types/product-types";
 import { create } from "zustand";
-
-interface ProductStoreState {
-  data: Product[];
-  isLoading: boolean;
-  totalCount: number;
-  getAll: (params: GetAll) => Promise<void>;
-}
 
 const useProductStore = create<ProductStoreState>((set) => ({
   data: [],

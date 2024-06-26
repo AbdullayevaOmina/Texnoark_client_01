@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   categoryIcon,
   rightIconB,
@@ -6,8 +6,10 @@ import {
   xIcon,
 } from "@/assets/icons/global";
 import { catoryIconsData } from "@/assets/icons/categorys";
+import useCategoryStore from "@/store/category";
 
 const CategoryModal: React.FC = () => {
+  const { categoriesData, getAll } = useCategoryStore();
   const [open, setOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [data, setData] = useState<{
@@ -30,6 +32,12 @@ const CategoryModal: React.FC = () => {
     },
     []
   );
+
+  useEffect(() => {
+    getAll({ page: 1, limit: 100, search: "" });
+  }, []);
+
+  console.log(categoriesData);
 
   return (
     <>

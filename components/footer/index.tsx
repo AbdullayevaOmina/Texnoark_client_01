@@ -1,10 +1,17 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/images/logo.png";
 import { socialsData } from "@/assets/icons/socialicons";
-import { emailIcon, locationIcon, phoneIcon } from "@/assets/icons/global"; // locationcon dan locationIcon ga o'zgartirildi
+import { emailIcon, locationIcon, phoneIcon } from "@/assets/icons/global";
+import useCategoryStore from "@/store/category";
+import { useEffect } from "react";
 
 const Footer = () => {
+  const { categoriesData, getAll } = useCategoryStore();
+  useEffect(() => {
+    getAll({ page: 1, limit: 100, search: "" });
+  }, []);
   return (
     <>
       <div className="bg-white rounded-lg p-[60px] h-[400px] flex justify-between">
@@ -35,23 +42,26 @@ const Footer = () => {
           </div>
         </div>
 
-        <ul className="text-gray-500 text-[14px] flex-1">
-          <b className="text-[18px] text-black">Tashkilot haqida</b>
-          <li className="mt-4">Texnoark haqida</li>
-          <li>Muddatli to&apos;lov</li>
-          <li>Yordam</li>
-          <li>Tovarlarga kafolat</li>
-          <li>To&apos;lov usullari</li>
+        <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
+          <b className="text-[18px] text-black mb-3 block">Tashkilot haqida</b>
+          <li className="hover:text-black cursor-pointer">Texnoark haqida</li>
+          <li className="hover:text-black cursor-pointer">
+            Muddatli to&apos;lov
+          </li>
+          <li className="hover:text-black cursor-pointer">Yordam</li>
+          <li className="hover:text-black cursor-pointer">
+            Tovarlarga kafolat
+          </li>
+          <li className="hover:text-black cursor-pointer">
+            To&apos;lov usullari
+          </li>
         </ul>
-        <ul className="text-gray-500 text-[14px] flex-1">
-          <b className="text-[18px] text-black">Kategoriya</b>
-          <li className="mt-4">Telivizorlar</li>
-          <li>Noutbook va Kompuyetrlar</li>
-          <li>Smartfonlar</li>
-          <li>Kir yuvish mashinasi</li>
-          <li>Muzlatgichalar</li>
-          <li>Kondetsioner</li>
-          <li>Pech va Gazpilita</li>
+
+        <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
+          <b className="text-[18px] text-black mb-4 block">Kategoriya</b>
+          {categoriesData.map((item, index) => (
+            <li className="hover:text-black cursor-pointer">{item.name}</li>
+          ))}
         </ul>
 
         <ul className="text-gray-500 text-[14px] flex-1">

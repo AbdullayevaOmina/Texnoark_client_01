@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from "next/navigation";
 import {
   addToCartIcon,
   heartOutlineIcon,
@@ -5,17 +7,23 @@ import {
 } from "@/assets/icons/global";
 import Image from "next/image";
 import pr_img from "@/assets/images/product-img.png";
+import { setDataFromCookie } from "@/helpers/cookie";
 
 const ProductCard = () => {
+  const router = useRouter();
+
+  const viewSingleProduct = (product_id: string) => {
+    setDataFromCookie("product_id", product_id);
+    router.push(`/products/${product_id}`);
+  };
+
   return (
-    <div className="w-[305px] h-[460px] bg-white rounded-lg p-[27px] flex flex-col justify-between">
+    <div
+      className="w-[305px] h-[460px] bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer"
+      onClick={() => viewSingleProduct("1")}
+    >
       <div className="flex justify-center">
-        <Image
-          src={pr_img}
-          alt="img"
-          width={200} // kenglik atributini qo'shish
-          height={200} // balandlik atributini qo'shish
-        />
+        <Image src={pr_img} alt="img" width={200} height={200} />
       </div>
       <div className="grid gap-2">
         <h3 className="text-[16px] text-gray-700">

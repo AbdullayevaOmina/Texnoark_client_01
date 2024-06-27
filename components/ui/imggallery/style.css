@@ -1,0 +1,24 @@
+.mySwiper2 {
+  height: 560px;
+  width: 660px;
+}
+
+.mySwiper {
+  height: 560px;
+}
+
+.mySwiper .swiper-slide {
+  height: 124px;
+  width: 140px;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 70%;
+  object-fit: cover;
+}

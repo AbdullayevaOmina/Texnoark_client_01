@@ -4,7 +4,7 @@ import ProductCard from "@/components/ui/card/product-card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Mousewheel } from "swiper/modules";
 
 const AksiyaProducts = () => {
   return (
@@ -17,8 +17,9 @@ const AksiyaProducts = () => {
       </div>
       <div className="">
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Mousewheel]}
           navigation
+          mousewheel={true}
           spaceBetween={0}
           slidesPerView={4}
         >

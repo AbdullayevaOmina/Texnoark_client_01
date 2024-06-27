@@ -4,7 +4,6 @@ import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import {
   cartIcon,
-  categoryIcon,
   heartOutlineIcon,
   searchIcon,
   statistikIcon,
@@ -78,8 +77,8 @@ const Header = () => {
       </nav>
       <header className="flex items-center justify-between bg-white rounded-lg px-8 py-3 mt-2">
         <Link href="/" className="flex items-center gap-1 text-[14px]">
-          <Image src={logo} alt="logo" className="w-10" />
-          <b className="text-[#d25300] font-extrabold">EXNOARK</b>
+          <Image src={logo} alt="logo" className="w-11" />
+          <b className="text-[#d25300] text-[20px] font-extrabold">EXNOARK</b>
         </Link>
         <div className="flex gap-5">
           {/* <button className="w-[175px] h-[46px] bg-[#1EB91E] rounded-lg text-white font-bold text-[14px] flex justify-center items-center gap-3">
@@ -108,12 +107,12 @@ const Header = () => {
               2
             </div>
           </button>
-          <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
+          <Link href="/cart" className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
             {cartIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
               7
             </div>
-          </button>
+          </Link>
           <Dropdown
             menu={{ items: authItems }}
             placement="bottom"

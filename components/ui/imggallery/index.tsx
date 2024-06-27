@@ -28,7 +28,7 @@ export default function ImgGallery() {
         className="mySwiper"
       >
         {[1, 2, 4, 5, 6, 7, 8].map((item, index) => (
-          <SwiperSlide className="bg-white p-3 flex items-center justify-center rounded-lg">
+          <SwiperSlide className="bg-white p-3 flex items-center justify-center rounded-lg cursor-pointer">
             <Image src={prImg} alt="im" />
           </SwiperSlide>
         ))}

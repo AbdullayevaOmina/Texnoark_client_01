@@ -3,6 +3,8 @@ import { furgonIcon, homeIcon, soatIcon } from "@/assets/icons/global";
 import { AksiyaProducts } from "@/components/sections";
 import ImgGaleery from "@/components/ui/imggallery";
 import { getDataFromCookie } from "@/helpers/cookie";
+import Image from "next/image";
+import shivakiImg from "@/assets/images/shivaki.png";
 
 const SingleProductPage = () => {
   const product_id = getDataFromCookie("product_id");
@@ -13,7 +15,7 @@ const SingleProductPage = () => {
         <div className="w-[70%]">
           <ImgGaleery />
         </div>
-        <div className="w-[30%] ">
+        <div className="w-[30%]">
           <div className="bg-white rounded-lg p-5">
             <h1 className="font-bold ">Apple iPhone 13 128Gb Moviy</h1>
             <div className="flex items-center gap-5 my-4 text-gray-500">
@@ -53,6 +55,61 @@ const SingleProductPage = () => {
               <div className="flex items-center gap-4">
                 {soatIcon}
                 <small>Tahminiy yetkazib berish 1 kundan 3 kungacha</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mt-10">
+        <div className="flex gap-5 my-4">
+          <button className="h-[40px] px-5 bg-[#FF6F14] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
+            Telfon xususiyatlari
+          </button>
+          <button className="h-[40px] px-5 rounded-lg bg-white font-bold text-[12px] flex justify-center items-center gap-3">
+            Mijozlarni fikri
+          </button>
+        </div>
+        <div className="flex gap-5">
+          <div className="bg-[#f5f5f5] p-8 w-[60%] rounded-lg">
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">Brend</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">CIM karta uyasi</h1>
+              <h1 className="flex-1">2 ta</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">O'lcham</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">Model</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">Akumlyator hajmi</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">Yadrolar soni</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
+              <h1 className="flex-1">Brend</h1>
+              <h1 className="flex-1">Vivo</h1>
+            </div>
+            <div />
+          </div>
+          <div className="w-[40%] bg-white rounded-lg p-8 flex flex-col items-center gap-3">
+            <Image src={shivakiImg} alt="img" className="w-[360px] h-[104px]" />
+            <div className=" relative">
+              <h1 className="bg-[#ff6f14] text-white px-3 p-1 rounded-lg text-[30px] font-bold">
+                Shivakini mahsulotlaridan <br /> harid qiling
+              </h1>
+              <div className="absolute top-12 right-0 bg-white rounded-l-lg text-center flex flex-col items-center justify-center">
+                <b className="text-[85px] font-bold text-[#1EB91E] block pl-3">30%</b>
+                <b className="text-[#ff6f14]">Chegirmaga ega bo‘ling</b>
               </div>
             </div>
           </div>

@@ -28,8 +28,10 @@ export default function ImgGallery() {
         className="mySwiper"
       >
         {[1, 2, 4, 5, 6, 7, 8].map((item, index) => (
-          <SwiperSlide className="bg-white p-3 flex items-center justify-center rounded-lg cursor-pointer">
-            <Image src={prImg} alt="im" />
+          <SwiperSlide className="bg-white p-3 rounded-lg cursor-pointer">
+            <div className="flex items-center justify-center">
+              <Image src={prImg} alt="im" />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -42,8 +44,10 @@ export default function ImgGallery() {
         className="mySwiper2"
       >
         {[1, 2, 4, 5, 6, 7, 8].map((item, index) => (
-          <SwiperSlide className="bg-white p-5 rounded-lg w-[660px] h-[560px] flex items-center justify-center">
-            <Image src={prImg} alt="im" />
+          <SwiperSlide className="bg-white p-5 rounded-lg w-[660px] h-[560px] ">
+            <div className="flex items-center justify-center">
+              <Image src={prImg} alt="im" />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

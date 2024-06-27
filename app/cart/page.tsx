@@ -8,7 +8,7 @@ const CartPage = () => {
     <div className="mb-10">
       <div className="flex gap-5 container my-5">
         <div className="w-[80%] grid gap-3">
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[1, 2, 3, 4, 5,6].map((i) => (
             <div
               key={i}
               className="bg-white rounded-lg p-5 px-14 flex justify-between"
@@ -27,7 +27,7 @@ const CartPage = () => {
                 </div>
               </div>
               <div>
-                <b className="text-[24px]">14 699 999 so‘m</b>
+                <b className="text-[20px]">14 699 999 so‘m</b>
                 <div className="flex gap-3 justify-end mt-5">
                   <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
                     {deleteIcon}

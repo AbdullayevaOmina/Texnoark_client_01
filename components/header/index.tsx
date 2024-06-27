@@ -95,19 +95,25 @@ const Header = () => {
           </div>
         </div>
         <div className="flex gap-5 ">
-          <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
+          <Link
+            href="/wishlist"
+            className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg"
+          >
             {heartOutlineIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
               6
             </div>
-          </button>
+          </Link>
           <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
             {statistikIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
               2
             </div>
           </button>
-          <Link href="/cart" className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
+          <Link
+            href="/cart"
+            className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg"
+          >
             {cartIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
               7

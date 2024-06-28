@@ -8,7 +8,7 @@ const CartPage = () => {
     <div className="mb-10">
       <div className="flex gap-5 container my-5">
         <div className="w-[80%] grid gap-3">
-          {[1, 2, 3, 4, 5,6].map((i) => (
+          {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
               className="bg-white rounded-lg p-5 px-14 flex justify-between"
@@ -57,7 +57,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <AksiyaProducts/>
+      <AksiyaProducts />
     </div>
   );
 };

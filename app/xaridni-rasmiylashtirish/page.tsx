@@ -52,9 +52,9 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
 
   return (
     <div className="my-5">
-      <div className="container flex gap-5">
-        <div className="w-[70%]">
-          <div className="bg-white rounded-lg p-[44px]">
+      <div className="container flex flex-col lg:flex-row gap-5">
+        <div className="w-full lg:w-[70%]">
+          <div className="bg-white rounded-lg p-4 lg:p-[44px]">
             <Formik
               initialValues={initialValues}
               validationSchema={schemaSignup}
@@ -62,7 +62,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
             >
               {({ setFieldValue }) => (
                 <Form className="grid gap-4 mt-4">
-                  <div className="flex gap-3">
+                  <div className="flex flex-col lg:flex-row gap-3">
                     <div className="w-full">
                       <small className="text-gray-500 text-[10px]">
                         Telefon raqam
@@ -71,7 +71,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                         {({ field }: { field: any }) => (
                           <input
                             {...field}
-                            // placeholder="+998 (__) ___-__-__"
+                            placeholder="+998 (__) ___-__-__"
                             ref={inputRef}
                             className="outline-1 outline-blue-600 w-full p-1 px-2 border rounded-md"
                           />
@@ -107,7 +107,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                     </Space>
                   </Radio.Group>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col lg:flex-row gap-3">
                     <div className="w-full">
                       <small className="text-gray-500 text-[10px]">
                         Viloyat
@@ -119,7 +119,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                           setFieldValue("region", value);
                           setFieldValue("districts", []);
                         }}
-                        // placeholder="Viloyatni tanlang"
+                        placeholder="Viloyatni tanlang"
                       >
                         {data.map((region) => (
                           <Option
@@ -137,8 +137,9 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                         {({ field }: { field: any }) => (
                           <Select
                             {...field}
+                            mode="multiple"
                             className="w-full"
-                            // placeholder="Tumanlarni tanlang"
+                            placeholder="Tumanlarni tanlang"
                             onChange={(value) =>
                               setFieldValue("districts", value)
                             }
@@ -154,8 +155,8 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
-                    <div className="w-[70%]">
+                  <div className="flex flex-col lg:flex-row gap-3">
+                    <div className="w-full lg:w-[70%]">
                       <small className="text-gray-500 text-[10px]">
                         Aniq manzilni kiriting: Mahalla/Ko’cha/Uy
                       </small>
@@ -166,23 +167,23 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                         placeholder="Tinchlik mahallasi Yoshlik-1 ko’chasi 12-uy"
                       />
                       <ErrorMessage
-                        name="mazil"
+                        name="manzil"
                         component="small"
                         className="text-[red]"
                       />
                     </div>
-                    <div className="w-[30%]">
+                    <div className="w-full lg:w-[30%]">
                       <small className="text-gray-500 text-[10px]">
                         Yetkazib berish sanasi
                       </small>
                       <Field
-                        name="full_name"
+                        name="delivery_date"
                         type="text"
                         as={Input}
                         placeholder="08/24"
                       />
                       <ErrorMessage
-                        name="full_name"
+                        name="delivery_date"
                         component="small"
                         className="text-[red]"
                       />
@@ -195,7 +196,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
                         Naqtd yetkazgandan so’ng to’lash
                       </Radio>
                       <Radio className="text-[14px]" value={2}>
-                        Karta orqali ( Humo/Uzcard/Visa/)
+                        Karta orqali (Humo/Uzcard/Visa)
                       </Radio>
                       <Radio className="text-[14px]" value={3}>
                         Muddatli to’lov (4/6/12/24 oyga)
@@ -208,8 +209,8 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-[30%]">
-          <div className="bg-white rounded-lg p-8 flex flex-col gap-3">
+        <div className="w-full lg:w-[30%]">
+          <div className="bg-white rounded-lg p-4 lg:p-8 flex flex-col gap-3">
             <b className="block text-center text-[18px]">
               Sizning haridlaringiz
             </b>

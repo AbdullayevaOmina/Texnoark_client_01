@@ -1,75 +1,48 @@
-"use client"
+"use client";
 import { useState } from "react";
-import { copyIcon, shareIcon } from "@/assets/icons/global";
 import { AksiyaProducts } from "@/components/sections";
+import {
+  AboutTexnoark,
+  MuddatliTolov,
+  Yordam,
+  TovarlargaKafolat,
+  TolovUsullari,
+} from "@/components/about-tabSwiters/index";
 
-const titles = [
-  "Texnoark haqida",
-  "Muddatli to’lov",
-  "Yordam",
-  "Tovarlarga kafolat",
-  "To‘lov usullari",
+const tab_list = [
+  { id: 1, tab: <AboutTexnoark />, title: "Texnoark haqida" },
+  { id: 2, tab: <MuddatliTolov />, title: "Muddatli to’lov" },
+  { id: 3, tab: <Yordam />, title: "Yordam" },
+  { id: 4, tab: <TovarlargaKafolat />, title: "Tovarlarga kafolat" },
+  { id: 5, tab: <TolovUsullari />, title: "To‘lov usullari" },
 ];
 
 const AboutPage = () => {
   const [activeTitle, setActiveTitle] = useState("Texnoark haqida");
 
+  const activeTab = tab_list.find((tab) => tab.title === activeTitle);
+
   return (
     <div className="mb-8">
       <div className="container my-4 mb-10">
         <div className="flex gap-3 mb-4">
-          {titles.map((item, i) => (
+          {tab_list.map((item) => (
             <button
-              key={i}
-              onClick={() => setActiveTitle(item)}
+              key={item.id}
+              onClick={() => setActiveTitle(item.title)}
               className={`w-[175px] h-[46px] rounded-lg font-bold text-[14px] flex justify-center items-center gap-3 ${
-                activeTitle === item ? "bg-[#FF6F14] text-white" : "bg-white"
+                activeTitle === item.title
+                  ? "bg-[#FF6F14] text-white"
+                  : "bg-white"
               }`}
             >
-              {item}
+              {item.title}
             </button>
           ))}
         </div>
-        <div className="h-[526px] bg-white rounded-lg p-[60px]">
-          <h1 className="text-[35px] font-extrabold">{activeTitle}</h1>
-          <div className="flex gap-10 my-5">
-            <div>
-              Many desktop publishing packages and web page editors now use
-              Lorem Ipsum as their default model text, and a search for 'lorem
-              ipsum' will uncover many web sites still in their infancy. Various
-              versions have evolved over the years, sometimes by accident,
-              sometimes on purpose It is a long established fact that a reader
-              will be distracted by the readable content of a page when looking
-              at its layout.
-              <br />
-              <br />
-              The point of using Lorem Ipsum is that it has a more-or-less
-              normal distribution of letters, as opposed to using 'Content here,
-              content here', making it look like readable English.
-            </div>
-            <div>
-              Many desktop publishing packages and web page editors now use
-              Lorem Ipsum as their default model text, and a search for 'lorem
-              ipsum' will uncover many web sites still in their infancy. Various
-              versions have evolved over the years, sometimes by accident,
-              sometimes on purpose It is a long established fact that a reader
-              will be distracted by the readable content of a page when looking
-              at its layout.
-              <br />
-              <br />
-              The point of using Lorem Ipsum is that it has a more-or-less
-              normal distribution of letters, as opposed to using 'Content here,
-              content here', making it look like readable English.
-            </div>
-          </div>
-          <div className="flex gap-5">
-            <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
-              {copyIcon}
-            </button>
-            <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">
-              {shareIcon}
-            </button>
-          </div>
+
+        <div className="h-[526px] bg-white rounded-lg">
+          <div className="flex gap-10 my-5">{activeTab && activeTab.tab}</div>
         </div>
       </div>
       <AksiyaProducts />

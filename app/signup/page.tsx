@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const router = useRouter();
+  
   const handleSubmit = async (values: SignUp) => {
     const phone_number = values.phone_number.replace(/\D/g, "");
     const payload = { ...values, phone_number: `+${phone_number}` };
@@ -30,6 +31,7 @@ const SignUpPage = () => {
     mask: "+998 (__) ___-__-__",
     replacement: { _: /\d/ },
   });
+
   const initialValues: SignUp = {
     first_name: "",
     last_name: "",

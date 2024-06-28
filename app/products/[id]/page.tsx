@@ -5,6 +5,7 @@ import ImgGaleery from "@/components/ui/imggallery";
 import { getDataFromCookie } from "@/helpers/cookie";
 import Image from "next/image";
 import shivakiImg from "@/assets/images/shivaki.png";
+import Link from "next/link";
 
 const SingleProductPage = () => {
   const product_id = getDataFromCookie("product_id");
@@ -39,9 +40,12 @@ const SingleProductPage = () => {
               <button className="w-full h-[40px] bg-[#FF6F14] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
                 Savatga qo ‘shish
               </button>
-              <button className="w-full h-[40px] bg-[#1EB91E] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
+              <Link
+                href="/xaridni-rasmiylashtirish"
+                className="w-full h-[40px] bg-[#1EB91E] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3"
+              >
                 Xarid qilish
-              </button>
+              </Link>
             </div>
             <div className="grid gap-2 text-[14px]">
               <div className="flex items-center gap-4">
@@ -108,7 +112,9 @@ const SingleProductPage = () => {
                 Shivakini mahsulotlaridan <br /> harid qiling
               </h1>
               <div className="absolute top-12 right-0 bg-white rounded-l-lg text-center flex flex-col items-center justify-center">
-                <b className="text-[85px] font-bold text-[#1EB91E] block pl-3">30%</b>
+                <b className="text-[85px] font-bold text-[#1EB91E] block pl-3">
+                  30%
+                </b>
                 <b className="text-[#ff6f14]">Chegirmaga ega bo‘ling</b>
               </div>
             </div>

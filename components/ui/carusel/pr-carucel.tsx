@@ -10,7 +10,7 @@ import Link from "next/link";
 const ProductsCarucel = ({ title }: any) => {
   return (
     <div>
-      <div className="container flex justify-between items-center my-2 sm:my-4 md:my-8 lg:my-10">
+      <div className="container flex justify-between items-center my-3 sm:my-4 md:my-8 lg:my-10">
         <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
           {title}
         </b>
@@ -29,6 +29,7 @@ const ProductsCarucel = ({ title }: any) => {
           spaceBetween={0}
           slidesPerView={4}
           breakpoints={{
+            0: { slidesPerView: 1, spaceBetween: 0, centeredSlides: true },
             640: {
               slidesPerView: 2,
               spaceBetween: 20,

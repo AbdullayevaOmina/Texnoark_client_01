@@ -1,6 +1,6 @@
 import { deleteIcon, heartOutlineIcon } from "@/assets/icons/global";
 import prImg from "@/assets/images/product-img.png";
-import { AksiyaProducts } from "@/components/sections";
+import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 import Image from "next/image";
 
 const CartPage = () => {
@@ -57,7 +57,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <AksiyaProducts />
+      <ProductsCarucel title="Aksiyadagi mahsulotlar" />
     </div>
   );
 };

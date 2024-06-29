@@ -65,8 +65,8 @@ const Header = () => {
   };
 
   return (
-    <div className="mt-[10px]">
-      <nav className="flex justify-between items-center text-[14px] px-4 md:px-8">
+    <>
+      <nav className="flex justify-between items-center text-[14px] md:px-8 md:mt-3">
         <ul className="hidden md:flex gap-5">
           {navs.map((item, i) => (
             <li key={i}>
@@ -85,10 +85,16 @@ const Header = () => {
           </Dropdown>
         </div>
       </nav>
-      <header className="flex items-center justify-between bg-white rounded-lg px-4 py-3 mt-2 md:px-8">
+      <header className="flex items-center justify-between bg-white rounded-lg px-4 py-2 lg:py-3 mt-2 md:px-8">
         <Link href="/" className="flex items-center gap-1 text-[14px]">
-          <Image src={logo} alt="logo" className="w-11" />
-          <b className="text-[#d25300] text-[20px] font-extrabold">EXNOARK</b>
+          <Image
+            src={logo}
+            alt="logo"
+            className="w-[28px] md:w-[35px] lg:w-11"
+          />
+          <b className="text-[#d25300] text-[15px] md:text-[17px] lg:text-[20px] font-extrabold">
+            EXNOARK
+          </b>
         </Link>
         <div className="hidden md:flex gap-5">
           <CategoryModal />
@@ -187,7 +193,7 @@ const Header = () => {
           </div>
         </div>
       </Drawer>
-    </div>
+    </>
   );
 };
 

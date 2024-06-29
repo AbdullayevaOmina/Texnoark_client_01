@@ -7,7 +7,7 @@ const BrandsSection = () => {
   let index = 0;
 
   return (
-    <section className="my-8 overflow-hidden relative">
+    <section className="my-[10px] md:my-[15px] lg:my-[20px] overflow-hidden relative">
       <div className="gap-5 animate-scroll">
         {(() => {
           const cards = [];
@@ -16,9 +16,9 @@ const BrandsSection = () => {
             cards.push(
               <div
                 key={index}
-                className="w-[240px] h-[140px] bg-white rounded-lg flex items-center justify-center p-5"
+                className="w-[100px] h-[60px] md:w-[150px] md:h-[110px] lg:w-[200px] lg:h-[130px] bg-white rounded-lg flex items-center justify-center p-5 py-8"
               >
-                <Image src={img} alt="brand_img" className="" />
+                <Image src={img} alt="brand_img" className=" bg-cover" />
               </div>
             );
             index++;

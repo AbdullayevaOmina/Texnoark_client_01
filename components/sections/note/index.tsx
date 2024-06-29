@@ -20,3 +20,17 @@ const NoteSection = () => {
 };
 
 export default NoteSection;
+
+// import noteImg from "@/assets/images/note-section-img.png";
+// import Image from "next/image";
+// import React from "react";
+
+// const NoteSection = () => {
+//   return (
+//     <div className="container my-[10px] md:my-[15px] lg:my-[20px] ">
+//       <Image src={noteImg} alt="img" className="rounded-lg" />
+//     </div>
+//   );
+// };
+
+// export default NoteSection;

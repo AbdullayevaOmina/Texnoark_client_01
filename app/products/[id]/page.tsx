@@ -1,11 +1,11 @@
 "use client";
 import { furgonIcon, homeIcon, soatIcon } from "@/assets/icons/global";
-import { AksiyaProducts } from "@/components/sections";
 import ImgGaleery from "@/components/ui/imggallery";
 import { getDataFromCookie } from "@/helpers/cookie";
 import Image from "next/image";
 import shivakiImg from "@/assets/images/shivaki.png";
 import Link from "next/link";
+import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 
 const SingleProductPage = () => {
   const product_id = getDataFromCookie("product_id");
@@ -121,7 +121,7 @@ const SingleProductPage = () => {
           </div>
         </div>
       </div>
-      <AksiyaProducts />
+      <ProductsCarucel title="Aksiyadagi mahsulotlar" />
     </div>
   );
 };

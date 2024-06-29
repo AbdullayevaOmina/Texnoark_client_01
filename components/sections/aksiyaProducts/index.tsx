@@ -19,7 +19,7 @@ const AksiyaProducts = () => {
         <Swiper
           modules={[Navigation, Mousewheel]}
           navigation
-          mousewheel={true}
+          // mousewheel={true}
           spaceBetween={0}
           slidesPerView={4}
         >

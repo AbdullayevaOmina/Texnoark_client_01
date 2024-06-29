@@ -4,8 +4,8 @@ import { Input, Radio, RadioChangeEvent, Select, Space } from "antd";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useMask } from "@react-input/mask";
 import { schemaSignup } from "@/validations";
-import { AksiyaProducts } from "@/components/sections";
 import { data } from "./viloyatlar-data";
+import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 
 const { Option } = Select;
 
@@ -226,7 +226,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <AksiyaProducts />
+      <ProductsCarucel title="Aksiyadagi mahsulotlar" />
     </div>
   );
 };

@@ -7,7 +7,7 @@ const MainCarusel = () => {
     <>
       <Carousel
         autoplay
-        className="w-full mt-[10px] md:mt-[15px] lg:mt-[20px] rounded-lg arrows"
+        className="mt-2 md:mt-4 lg:mt-5 rounded-lg arrows"
       >
         {[1, 2, 3, 4].map((i) => (
           <Image src={cimg} alt="img" key={i} className="rounded-lg" />

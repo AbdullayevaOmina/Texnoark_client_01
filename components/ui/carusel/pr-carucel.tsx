@@ -7,12 +7,12 @@ import "swiper/css/navigation";
 import { Navigation, Mousewheel } from "swiper/modules";
 import Link from "next/link";
 
-const OmmabopProducts = () => {
+const ProductsCarucel = ({ title }: any) => {
   return (
     <div>
       <div className="container flex justify-between items-center my-2 sm:my-4 md:my-8 lg:my-10">
         <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
-          Ommabob mahsulotlar
+          {title}
         </b>
         <Link
           href={"/products"}
@@ -58,4 +58,4 @@ const OmmabopProducts = () => {
   );
 };
 
-export default OmmabopProducts;
+export default ProductsCarucel;

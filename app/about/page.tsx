@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { AksiyaProducts } from "@/components/sections";
 import {
   AboutTexnoark,
   MuddatliTolov,
@@ -8,6 +7,7 @@ import {
   TovarlargaKafolat,
   TolovUsullari,
 } from "@/components/about-tabSwiters/index";
+import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 
 const tab_list = [
   { id: 1, tab: <AboutTexnoark />, title: "Texnoark haqida" },
@@ -45,7 +45,7 @@ const AboutPage = () => {
           <div className="flex gap-10 my-5">{activeTab && activeTab.tab}</div>
         </div>
       </div>
-      <AksiyaProducts />
+      <ProductsCarucel title="Aksiyadagi mahsulotlar" />
     </div>
   );
 };

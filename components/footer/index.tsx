@@ -29,19 +29,21 @@ const Footer = () => {
               EXNOARK
             </b>
           </Link>
-          <b className="text-[16px] sm:text-[18px] mt-8 block mb-5">
-            Bizni ijtimoiyi tarmoqlar
-          </b>
-          <div className="flex gap-3">
-            {socialsData.map((item, index) => (
-              <a
-                key={index}
-                href={item.link}
-                className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-2 px-2 sm:py-[13px] sm:px-[14px] rounded-lg"
-              >
-                {item.icon}
-              </a>
-            ))}
+          <div>
+            <b className="text-[16px] sm:text-[18px] mt-8 block mb-5">
+              Bizni ijtimoiyi tarmoqlar
+            </b>
+            <div className="flex gap-3">
+              {socialsData.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.link}
+                  className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-2 px-2 sm:py-[13px] sm:px-[14px] rounded-lg"
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -30,22 +30,22 @@ const ProductsCarucel = ({ title }: any) => {
           spaceBetween={0}
           slidesPerView={4}
           breakpoints={{
-            // 0: { slidesPerView: 1, spaceBetween: 10, centeredSlides: true },
+            0: { slidesPerView: 1, spaceBetween: 2},
             320: {
               slidesPerView: 2,
-              spaceBetween: 0,
+              spaceBetween: 5,
             },
             768: {
               slidesPerView: 3,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
             1024: {
               slidesPerView: 4,
-              spaceBetween: 40,
+              spaceBetween: 10,
             },
             1900: {
               slidesPerView: 5,
-              spaceBetween: 50,
+              spaceBetween: 10,
             },
           }}
         >

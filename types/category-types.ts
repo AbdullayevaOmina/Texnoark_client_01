@@ -4,6 +4,10 @@ export interface GetAll {
   search: string | null | undefined;
 }
 
+export interface GetAllSub extends GetAll {
+  parent_category_id: number;
+}
+
 export interface CategoryData {
   id: number;
   createdAt: string;
@@ -13,7 +17,9 @@ export interface CategoryData {
 
 export interface CategoryStoreState {
   categoriesData: any[];
+  subCategoryData: any[];
   isLoading: boolean;
   totalCount: number;
-  getAll: (params: GetAll) => Promise<void>;
+  getAllCategories: (params: GetAll) => Promise<void>;
+  getAllSub: (params: GetAllSub) => Promise<void>;
 }

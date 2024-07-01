@@ -8,9 +8,9 @@ import useCategoryStore from "@/store/category";
 import { useEffect } from "react";
 
 const Footer = () => {
-  const { categoriesData, getAll } = useCategoryStore();
+  const { categoriesData, getAllCategories } = useCategoryStore();
   useEffect(() => {
-    getAll({ page: 1, limit: 100, search: "" });
+    getAllCategories({ page: 1, limit: 100, search: "" });
   }, []);
 
   return (

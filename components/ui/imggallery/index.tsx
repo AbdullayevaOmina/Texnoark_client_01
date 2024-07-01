@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Swiper as SwiperInstance } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Mousewheel } from "swiper/modules";
 
@@ -12,7 +13,8 @@ import prImg from "@/assets/images/product-img.png";
 import Image from "next/image";
 
 export default function ImgGallery() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperInstance | null>(null);
+
   return (
     <div className="flex">
       <Swiper

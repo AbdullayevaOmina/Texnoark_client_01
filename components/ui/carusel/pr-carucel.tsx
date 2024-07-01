@@ -4,8 +4,9 @@ import ProductCard from "@/components/ui/card/product-card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Mousewheel } from "swiper/modules";
+import { Navigation, Mousewheel, Thumbs } from "swiper/modules";
 import Link from "next/link";
+import "./pr-carucel.css";
 
 const ProductsCarucel = ({ title }: any) => {
   return (
@@ -23,16 +24,16 @@ const ProductsCarucel = ({ title }: any) => {
       </div>
       <div>
         <Swiper
-          modules={[Navigation, Mousewheel]}
+          modules={[Navigation, Mousewheel, Thumbs]}
           navigation
           // mousewheel={true}
           spaceBetween={0}
           slidesPerView={4}
           breakpoints={{
-            0: { slidesPerView: 1, spaceBetween: 0, centeredSlides: true },
-            640: {
+            // 0: { slidesPerView: 1, spaceBetween: 10, centeredSlides: true },
+            320: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             768: {
               slidesPerView: 3,

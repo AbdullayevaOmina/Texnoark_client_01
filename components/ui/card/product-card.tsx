@@ -19,14 +19,14 @@ const ProductCard = () => {
 
   return (
     <div
-      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[205px] h-[460px] sm:w-[305px] md:h-[460px]"
+      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[210px] h-[340px] md:w-[305px] md:h-[460px] lg:w-[305px] lg:h-[460px]"
       onClick={() => viewSingleProduct("1")}
     >
       <div className="flex justify-center">
         <Image src={pr_img} alt="img" width={200} height={200} />
       </div>
-      <div className="grid gap-2">
-        <h3 className="text-[16px] text-gray-700">
+      <div className="grid gap-2 mt-4">
+        <h3 className="text-[13px] md:text-[16px] text-gray-700">
           Kir yuvish mashinasi LG F2V7GW9T
         </h3>
         <b>
@@ -36,14 +36,14 @@ const ProductCard = () => {
           1 134 890 so'mdan/12 oy
         </div>
       </div>
-      <div className="flex justify-between items-center">
-        <button className="bg-[#D55200] rounded-lg px-[25px] py-[12px] text-white text-[14px] flex items-center gap-2">
-          {addToCartIcon} Savat
+      <div className="flex justify-between items-center mt-3">
+        <button className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-[10px] py-[10px] sm:px-[25px] sm:py-[12px] text-[14px]">
+          {addToCartIcon} <span className="hidden md:flex">Savat</span>
         </button>
-        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[14px] px-[17px] rounded-lg">
+        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg">
           {heartOutlineIcon}
         </button>
-        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[14px] px-[17px] rounded-lg">
+        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg">
           {statistikIcon}
         </button>
       </div>

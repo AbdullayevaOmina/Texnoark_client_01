@@ -19,7 +19,7 @@ const ProductCard = () => {
 
   return (
     <div
-      className="w-[305px] h-[460px] bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer"
+      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[205px] h-[460px] sm:w-[305px] md:h-[460px]"
       onClick={() => viewSingleProduct("1")}
     >
       <div className="flex justify-center">

@@ -96,12 +96,12 @@ const Header = () => {
             EXNOARK
           </b>
         </Link>
-        <div className="hidden md:flex gap-5">
+        <div className="hidden md:flex gap-5 w-full ml-20 mx-5">
           <CategoryModal />
-          <div className="relative">
+          <div className="relative w-full">
             <input
               placeholder="Хочу купить..."
-              className="w-[200px] md:w-[400px] h-[46px] bg-[#f0f0f0] rounded-lg px-5 outline-none text-[14px]"
+              className=" w-full h-[46px] bg-[#f0f0f0] rounded-lg px-5 outline-none text-[14px]"
             />
             <div className="absolute top-[15px] right-3">{searchIcon}</div>
           </div>

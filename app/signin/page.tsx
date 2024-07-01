@@ -78,7 +78,7 @@ const SignInPage = () => {
                   Sizda hisob yo'qmi?
                 </small>
                 <Link href="/signup" className="text-[13px] text-sky-500">
-                  Ro&#39;yxatdan o&#39;tish
+                  Ro'yxatdan o'tish
                 </Link>
               </div>
 

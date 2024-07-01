@@ -5,17 +5,10 @@ import {
   rightIconW,
   xIcon,
 } from "@/assets/icons/global";
-import { catoryIconsData } from "@/assets/icons/categorys";
 import useCategoryStore from "@/store/category";
 
 const CategoryModal: React.FC = () => {
-  const {
-    categoriesData,
-    getAllCategories,
-    getAllSub,
-    // subCategoryData,
-    isLoading,
-  } = useCategoryStore();
+  const { categoriesData, getAllCategories, getAllSub } = useCategoryStore();
   const [open, setOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [data, setData] = useState<any>(null);
@@ -48,7 +41,6 @@ const CategoryModal: React.FC = () => {
     },
     [getAllSub]
   );
-
 
   useEffect(() => {
     getAllCategories({ page: 1, limit: 100, search: "" });
@@ -114,7 +106,9 @@ const CategoryModal: React.FC = () => {
                 </button>
               ))}
             </div>
-            <div className="w-[70%] p-8">{data && <div>{data[0]?.name}</div>}</div>
+            <div className="w-[70%] p-8">
+              {data && <div>{data[0]?.name}</div>}
+            </div>
           </div>
         </div>
       </div>

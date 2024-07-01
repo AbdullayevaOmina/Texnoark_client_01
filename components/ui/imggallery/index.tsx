@@ -27,8 +27,11 @@ export default function ImgGallery() {
         modules={[FreeMode, Navigation, Thumbs, Mousewheel]}
         className="mySwiper"
       >
-        {[1, 2, 4, 5, 6, 7, 8].map((item, index) => (
-          <SwiperSlide className="bg-white p-3 rounded-lg cursor-pointer">
+        {[1, 2, 4, 5, 6, 7, 8].map((item) => (
+          <SwiperSlide
+            key={item}
+            className="bg-white p-3 rounded-lg cursor-pointer"
+          >
             <div className="flex items-center justify-center">
               <Image src={prImg} alt="im" />
             </div>
@@ -43,8 +46,11 @@ export default function ImgGallery() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {[1, 2, 4, 5, 6, 7, 8].map((item, index) => (
-          <SwiperSlide className="bg-white p-5 rounded-lg w-[660px] h-[560px] ">
+        {[1, 2, 4, 5, 6, 7, 8].map((item) => (
+          <SwiperSlide
+            key={item}
+            className="bg-white p-5 rounded-lg w-[660px] h-[560px] "
+          >
             <div className="flex items-center justify-center">
               <Image src={prImg} alt="im" />
             </div>

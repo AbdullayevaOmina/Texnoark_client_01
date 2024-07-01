@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
   const router = useRouter();
+
   const handleSubmit = async (values: SignIn) => {
     const phone_number = values.phone_number.replace(/\D/g, "");
     const payload = { ...values, phone_number: `+${phone_number}` };
@@ -54,7 +55,7 @@ const SignInPage = () => {
                 <ErrorMessage
                   name="phone_number"
                   component="small"
-                  className="text-[red]"
+                  className="text-red-500"
                 />
               </div>
 
@@ -68,16 +69,16 @@ const SignInPage = () => {
                 <ErrorMessage
                   name="password"
                   component="small"
-                  className="text-[red]"
+                  className="text-red-500"
                 />
               </div>
 
               <div className="flex justify-between mb-4">
-                <small className="dark:text-gray-400 ">
+                <small className="dark:text-gray-400">
                   Sizda hisob yo'qmi?
                 </small>
                 <Link href="/signup" className="text-[13px] text-sky-500">
-                  Ro'yxatdan o'tish
+                  Ro&#39;yxatdan o&#39;tish
                 </Link>
               </div>
 
@@ -85,7 +86,6 @@ const SignInPage = () => {
                 type="submit"
                 className="w-full bg-[#D55200] rounded-lg text-white py-1"
               >
-                {/* {isSubmitting ? <Spin /> : "Submit"} */}
                 {isSubmitting ? "Yuborilmoqda" : "Yuborish"}
               </button>
             </Form>

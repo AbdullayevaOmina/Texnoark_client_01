@@ -1,15 +1,12 @@
 "use client";
 import { furgonIcon, homeIcon, soatIcon } from "@/assets/icons/global";
 import ImgGaleery from "@/components/ui/imggallery";
-import { getDataFromCookie } from "@/helpers/cookie";
 import Image from "next/image";
 import shivakiImg from "@/assets/images/shivaki.png";
 import Link from "next/link";
 import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 
 const SingleProductPage = () => {
-  const product_id = getDataFromCookie("product_id");
-
   return (
     <div className="my-5">
       <div className="container my-5 flex">

@@ -25,12 +25,12 @@ const AboutPage = () => {
   return (
     <div className="mb-8">
       <div className="container my-4 mb-10">
-        <div className="flex gap-3 mb-4">
+        <div className="flex flex-wrap gap-3 mb-4">
           {tab_list.map((item) => (
             <button
               key={item.id}
               onClick={() => setActiveTitle(item.title)}
-              className={`w-[175px] h-[46px] rounded-lg font-bold text-[14px] flex justify-center items-center gap-3 ${
+              className={`w-full sm:w-[175px] h-[46px] rounded-lg font-bold text-[14px] flex justify-center items-center gap-3 ${
                 activeTitle === item.title
                   ? "bg-[#FF6F14] text-white"
                   : "bg-white"
@@ -41,8 +41,10 @@ const AboutPage = () => {
           ))}
         </div>
 
-        <div className="h-[526px] bg-white rounded-lg">
-          <div className="flex gap-10 my-5">{activeTab && activeTab.tab}</div>
+        <div className="w-full">
+          <div className="flex flex-col sm:flex-row gap-10 my-5">
+            {activeTab && activeTab.tab}
+          </div>
         </div>
       </div>
       <ProductsCarucel title="Aksiyadagi mahsulotlar" />

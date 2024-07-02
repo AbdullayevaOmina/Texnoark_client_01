@@ -9,13 +9,13 @@ import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 const SingleProductPage = () => {
   return (
     <div className="my-5">
-      <div className="container my-5 flex">
-        <div className="w-[70%]">
+      <div className="container my-5 flex flex-col lg:flex-row gap-5">
+        <div className="w-full lg:w-[70%]">
           <ImgGaleery />
         </div>
-        <div className="w-[30%]">
+        <div className="w-full lg:w-[30%]">
           <div className="bg-white rounded-lg p-5">
-            <h1 className="font-bold ">Apple iPhone 13 128Gb Moviy</h1>
+            <h1 className="font-bold">Apple iPhone 13 128Gb Moviy</h1>
             <div className="flex items-center gap-5 my-4 text-gray-500">
               <small>Rang:</small>
               <div className="flex gap-3">
@@ -62,7 +62,7 @@ const SingleProductPage = () => {
         </div>
       </div>
       <div className="container mt-10">
-        <div className="flex gap-5 my-4">
+        <div className="flex flex-col md:flex-row gap-5 my-4">
           <button className="h-[40px] px-5 bg-[#FF6F14] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
             Telfon xususiyatlari
           </button>
@@ -70,8 +70,8 @@ const SingleProductPage = () => {
             Mijozlarni fikri
           </button>
         </div>
-        <div className="flex gap-5">
-          <div className="bg-[#f5f5f5] p-8 w-[60%] rounded-lg">
+        <div className="flex flex-col md:flex-row gap-5">
+          <div className="bg-[#f5f5f5] p-8 w-full md:w-[60%] rounded-lg">
             <div className="w-full flex border-b-2 border-dashed border-gray-400 py-3">
               <h1 className="flex-1">Brend</h1>
               <h1 className="flex-1">Vivo</h1>
@@ -102,9 +102,13 @@ const SingleProductPage = () => {
             </div>
             <div />
           </div>
-          <div className="w-[40%] bg-white rounded-lg p-8 flex flex-col items-center gap-3">
-            <Image src={shivakiImg} alt="img" className="w-[360px] h-[104px]" />
-            <div className=" relative">
+          <div className="hidden w-full md:w-[40%] bg-white rounded-lg p-8 lg:flex flex-col items-center gap-3">
+            <Image
+              src={shivakiImg}
+              alt="img"
+              className="w-[360px] h-[104px] lg:w-[360px] lg:h-[104px]"
+            />
+            <div className="relative">
               <h1 className="bg-[#ff6f14] text-white px-3 p-1 rounded-lg text-[30px] font-bold">
                 Shivakini mahsulotlaridan <br /> harid qiling
               </h1>

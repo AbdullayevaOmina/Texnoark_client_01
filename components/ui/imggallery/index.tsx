@@ -26,7 +26,7 @@ export default function ImgGallery() {
         freeMode={true}
         mousewheel={true}
         watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs, Mousewheel]}
+        modules={[FreeMode, Navigation, Mousewheel]}
         className="mySwiper"
       >
         {[1, 2, 4, 5, 6, 7, 8].map((item) => (
@@ -43,9 +43,10 @@ export default function ImgGallery() {
       <Swiper
         loop={true}
         spaceBetween={20}
-        navigation={true}
+        // navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        // mousewheel={true}
+        modules={[FreeMode, Navigation, Thumbs, Mousewheel]}
         className="mySwiper2"
       >
         {[1, 2, 4, 5, 6, 7, 8].map((item) => (

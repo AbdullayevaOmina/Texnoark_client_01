@@ -209,7 +209,7 @@ const XaridniRasmiylashtirishPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-[30%]">
+        <div className="w-full lg:w-[30%] mb-8">
           <div className="bg-white rounded-lg p-4 lg:p-8 flex flex-col gap-3">
             <b className="block text-center text-[18px]">
               Sizning haridlaringiz

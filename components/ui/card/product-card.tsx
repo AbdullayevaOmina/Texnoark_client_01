@@ -19,13 +19,19 @@ const ProductCard = () => {
 
   return (
     <div
-      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[210px] h-[px] sm:w-[25px] sm:h-[380px] md:w-[305px] md:h-[460px] lg:w-[305px] lg:h-[460px]"
+      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[240px] h-[350px] md:w-[260px] md:h-[420px] lg:w-[305px] lg:h-[460px] "
       onClick={() => viewSingleProduct("1")}
     >
       <div className="flex justify-center">
-        <Image src={pr_img} alt="img" width={200} height={200} />
+        <Image
+          src={pr_img}
+          alt="img"
+          width={200}
+          height={200}
+          className="w-[120px] sm:w-[140px] md:w-[180px] lg:w-[200px]"
+        />
       </div>
-      <div className="grid md:gap-2 gap-1">
+      <div className="grid md:gap-2 gap-2">
         <h3 className="text-[13px] md:text-[16px] text-gray-700">
           Kir yuvish mashinasi LG F2V7GW9T
         </h3>
@@ -36,7 +42,7 @@ const ProductCard = () => {
           1 134 890 so'mdan/12 oy
         </div>
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-2 md:mt-3">
         <button className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-[10px] py-[10px] sm:px-[25px] sm:py-[12px] text-[14px]">
           {addToCartIcon} <span className="hidden md:flex">Savat</span>
         </button>

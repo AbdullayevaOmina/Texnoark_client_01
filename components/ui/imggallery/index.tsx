@@ -43,7 +43,7 @@ export default function ImgGallery() {
       <Swiper
         loop={true}
         spaceBetween={20}
-        // navigation={true}
+        navigation
         thumbs={{ swiper: thumbsSwiper }}
         // mousewheel={true}
         modules={[FreeMode, Navigation, Thumbs, Mousewheel]}

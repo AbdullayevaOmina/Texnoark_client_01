@@ -23,7 +23,7 @@ const Header = () => {
     { title: "Bizning kafolatlar", path: "/assurances" },
   ];
 
-  const [language, setLanguage] = useState("uzb");
+  const [language, setLanguage] = useState("uz");
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const handleLanguageChange = ({ key }: any) => {
@@ -32,16 +32,16 @@ const Header = () => {
 
   const languageItems: MenuProps["items"] = [
     {
-      key: "uzb",
-      label: "uzb",
+      key: "uz",
+      label: "uz",
     },
     {
       key: "ru",
       label: "ru",
     },
     {
-      key: "eng",
-      label: "eng",
+      key: "en",
+      label: "en",
     },
   ];
 
@@ -53,6 +53,10 @@ const Header = () => {
     {
       key: "2",
       label: <Link href="signup">Ro'yxatdan o'tish</Link>,
+    },
+    {
+      key: "3",
+      label: <Link href="acount">Acount</Link>,
     },
   ];
 

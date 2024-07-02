@@ -14,7 +14,7 @@ const tab_list = [
   { id: 2, tab: <MuddatliTolov />, title: "Muddatli to’lov" },
   { id: 3, tab: <Yordam />, title: "Yordam" },
   { id: 4, tab: <TovarlargaKafolat />, title: "Tovarlarga kafolat" },
-  { id: 5, tab: <TolovUsullari />, title: "To‘lov usullari" },
+  { id: 5, tab: <TolovUsullari />, title: "Tolov usullari" },
 ];
 
 const AboutPage = () => {

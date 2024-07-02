@@ -24,13 +24,15 @@ const ProductsCarucel = ({ title }: any) => {
       </div>
       <div>
         <Swiper
+      
           modules={[Navigation, Mousewheel, Thumbs]}
           navigation
           // mousewheel={true}
+
           spaceBetween={0}
           slidesPerView={4}
           breakpoints={{
-            0: { slidesPerView: 1, spaceBetween: 2},
+            0: { slidesPerView: 1, spaceBetween: 2 },
             320: {
               slidesPerView: 2,
               spaceBetween: 5,

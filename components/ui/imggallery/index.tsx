@@ -16,7 +16,7 @@ export default function ImgGallery() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperInstance | null>(null);
 
   return (
-    <div className="flex">
+    <div className="flex gap-3">
       <Swiper
         onSwiper={setThumbsSwiper}
         loop={true}
@@ -32,7 +32,7 @@ export default function ImgGallery() {
         {[1, 2, 4, 5, 6, 7, 8].map((item) => (
           <SwiperSlide
             key={item}
-            className="bg-white p-3 rounded-lg cursor-pointer"
+            className="bg-white p-3 rounded-lg cursor-pointer "
           >
             <div className="flex items-center justify-center">
               <Image src={prImg} alt="im" />

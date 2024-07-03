@@ -9,9 +9,9 @@ body {
   justify-content: space-between;
 }
 
-/* width */
+/* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 7px; /* Default scrollbar width */
 }
 
 /* Track */
@@ -31,15 +31,15 @@ body {
   background: #e06c1f;
 }
 
-/* Responsive styles
+/* Responsive styles */
 @media (max-width: 1024px) {
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px; /* Adjust width for medium screens */
   }
 }
 
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
-  width: 7px;
+    width: 6px; /* Adjust width for small screens */
+  }
 }
-} */

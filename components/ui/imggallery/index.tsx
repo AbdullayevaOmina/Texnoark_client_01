@@ -52,7 +52,7 @@ export default function ImgGallery() {
         {[1, 2, 4, 5, 6, 7, 8].map((item) => (
           <SwiperSlide
             key={item}
-            className="bg-white p-5 rounded-lg w-[660px] h-[560px] "
+            className="bg-white p-6 rounded-lg w-[660px] h-[560px]"
           >
             <div className="flex items-center justify-center">
               <Image src={prImg} alt="im" />

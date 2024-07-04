@@ -1,15 +1,12 @@
 import http from "@/api/interceptors";
-import { GetAll, Product } from "@/types/product-types";
+import {
+  GetAll,
+  BrandStoreState,
+  GetAllByCategoryId,
+} from "@/types/brand-types";
 import { create } from "zustand";
 
-interface ProductStoreState {
-  data: Product[];
-  isLoading: boolean;
-  totalCount: number;
-  getAll: (params: GetAll) => Promise<void>;
-}
-
-const useProductStore = create<ProductStoreState>((set) => ({
+const useBrandStore = create<BrandStoreState>((set) => ({
   data: [],
   isLoading: false,
   totalCount: 1,
@@ -21,7 +18,7 @@ const useProductStore = create<ProductStoreState>((set) => ({
         params: {
           page: params.page,
           limit: params.limit,
-          name: params.name,
+          name: params.search,
         },
       });
 
@@ -39,6 +36,26 @@ const useProductStore = create<ProductStoreState>((set) => ({
       set({ isLoading: false });
     }
   },
+  getAllByCategoryId: async (params: GetAllByCategoryId) => {
+    set({ isLoading: true });
+    try {
+      const response = await http.get(
+        `/brand/category/${params.id}?limit=${params.limit}&page=${params.page}`
+      );
+      if (response.status === 200) {
+        const { count, brands } = response.data.data;
+        set({
+          totalCount: Math.ceil(count / params.limit),
+        });
+        return brands;
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      set({ totalCount: 0 });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
 
-export default useProductStore;
+export default useBrandStore;

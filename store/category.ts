@@ -35,13 +35,14 @@ const useCategoryStore = create<CategoryStoreState>((set) => ({
       const response = await http.get(
         `/sub-category/search/${params.parent_category_id}?search=${params.search}&limit=${params.limit}&page=${params.page}`
       );
+
       if (response.status === 200) {
         const { count, categories } = response.data.data;
         set({
           totalCount: Math.ceil(count / params.limit),
           subCategoryData: categories,
         });
-        return categories
+        return categories;
       }
     } catch (error) {
       console.error("Error fetching products:", error);

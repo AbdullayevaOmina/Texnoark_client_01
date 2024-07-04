@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   categoryIcon,
   rightIconB,
@@ -6,45 +6,32 @@ import {
   xIcon,
 } from "@/assets/icons/global";
 import useCategoryStore from "@/store/category";
+import useBrandStore from "@/store/brands";
 
-const CategoryModal: React.FC = () => {
-  const { categoriesData, getAllCategories, getAllSub } = useCategoryStore();
+const CategoryModal = () => {
+  const { categoriesData, getAllCategories } = useCategoryStore();
+  const { getAllByCategoryId } = useBrandStore();
   const [open, setOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>([]);
 
-  const showDrawer = useCallback(() => {
+  const showDrawer = () => {
     setOpen((prevOpen) => !prevOpen);
-  }, []);
-
-  // const handleCategoryClick = useCallback(
-  //   (
-  //     index: number,
-  //     category: { black: JSX.Element; white: JSX.Element; title: string }
-  //   ) => {
-  //     setSelectedCategory(index);
-  //     setData(category);
-  //   },
-  //   []
-  // );
-
-  const handleCategoryClick = useCallback(
-    async (index: number, category: any) => {
-      setSelectedCategory(index);
-      const res: any = await getAllSub({
-        parent_category_id: category.id,
-        limit: 100,
-        page: 1,
-        search: "",
-      });
-      setData(res);
-    },
-    [getAllSub]
-  );
+  };
 
   useEffect(() => {
     getAllCategories({ page: 1, limit: 100, search: "" });
   }, []);
+
+  const handleCategoryClick = async (index: number, category: any) => {
+    setSelectedCategory(index);
+    const response: any = await getAllByCategoryId({
+      id: category.id,
+      limit: 100,
+      page: 1,
+    });
+    setData(response);
+  };
 
   return (
     <>
@@ -70,24 +57,6 @@ const CategoryModal: React.FC = () => {
         <div className="container w-[94%] rounded-lg bg-white shadow-xl px-16">
           <div className="flex">
             <div className="w-[30%] border-r-2 border-gray-200 grid place-content-center gap-3 p-8">
-              {/* {catoryIconsData.map((category, index) => (
-                <button
-                  type="button"
-                  key={index}
-                  className={`w-[300px] rounded-lg flex items-center justify-center py-2 px-6 ${
-                    selectedCategory === index
-                      ? "bg-orange-500 text-white"
-                      : "bg-[#f0f0f0]"
-                  }`}
-                  onClick={() => handleCategoryClick(index, category)}
-                >
-                  <div className="flex gap-4 items-center justify-between w-full">
-                    {selectedCategory !== index ? category.black : category.white}
-                    <span className="text-[14px]">{category.title}</span>
-                    {selectedCategory !== index ? rightIconB : rightIconW}
-                  </div>
-                </button>
-              ))} */}
               {categoriesData.map((category, index) => (
                 <button
                   type="button"
@@ -107,7 +76,20 @@ const CategoryModal: React.FC = () => {
               ))}
             </div>
             <div className="w-[70%] p-8">
-              {data && <div>{data[0]?.name}</div>}
+              <div className="flex flex-col items-start gap-2">
+                {data.length > 0 ? (
+                  data.map((item: any, index: number) => (
+                    <button
+                      key={index}
+                      className="p-2 bg-[#f0f0f0] w-40 rounded-lg"
+                    >
+                      {item.name}
+                    </button>
+                  ))
+                ) : (
+                  <div>Mahsulot yo'q</div>
+                )}
+              </div>
             </div>
           </div>
         </div>

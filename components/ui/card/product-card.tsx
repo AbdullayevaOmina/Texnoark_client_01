@@ -8,13 +8,30 @@ import {
 import Image from "next/image";
 import pr_img from "@/assets/images/product-img.png";
 import { setDataFromCookie } from "@/helpers/cookie";
+import useWishlistStore from "@/store/wishlist-store";
 
 const ProductCard = () => {
   const router = useRouter();
+  const { likePost } = useWishlistStore();
 
-  const viewSingleProduct = (product_id: string) => {
+  const viewSingleProduct = (product_id: any) => {
     setDataFromCookie("product_id", product_id);
     router.push(`/products/${product_id}`);
+  };
+
+  const handleLike = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await likePost(8);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Add to cart functionality here
+  };
+
+  const handleStatistik = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Statistik functionality here
   };
 
   return (
@@ -43,13 +60,22 @@ const ProductCard = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mt-2 md:mt-3">
-        <button className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-[10px] py-[10px] sm:px-[25px] sm:py-[12px] text-[14px]">
+        <button
+          className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-[10px] py-[10px] sm:px-[25px] sm:py-[12px] text-[14px]"
+          onClick={handleAddToCart}
+        >
           {addToCartIcon} <span className="hidden md:flex">Savat</span>
         </button>
-        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg">
+        <button
+          onClick={handleLike}
+          className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg"
+        >
           {heartOutlineIcon}
         </button>
-        <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg">
+        <button
+          onClick={handleStatistik}
+          className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg"
+        >
           {statistikIcon}
         </button>
       </div>

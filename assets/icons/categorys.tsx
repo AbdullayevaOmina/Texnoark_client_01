@@ -14,7 +14,6 @@ export const aksiyaIconB = (
     <circle cx="12" cy="13" r="2.25" stroke="black" stroke-width="1.5" />
   </svg>
 );
-
 export const aksiyaIconW = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +30,6 @@ export const aksiyaIconW = (
     <circle cx="12" cy="13" r="2.25" stroke="white" stroke-width="1.5" />
   </svg>
 );
-
 export const smartfonIconB = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +57,6 @@ export const smartfonIconB = (
     </defs>
   </svg>
 );
-
 export const smartfonIconW = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +84,6 @@ export const smartfonIconW = (
     </defs>
   </svg>
 );
-
 export const KYMIconB = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +118,6 @@ export const KYMIconB = (
     />
   </svg>
 );
-
 export const KYMIconW = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +152,6 @@ export const KYMIconW = (
     />
   </svg>
 );
-
 const catoryIconsData = [
   {
     black: aksiyaIconB,
@@ -190,5 +184,4 @@ const catoryIconsData = [
     title: "Kiryuvish mashinalari",
   },
 ];
-
 export { catoryIconsData };

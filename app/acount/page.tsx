@@ -1,13 +1,21 @@
 "use client";
 
-import { editIcon, rightIconB, rightIconW } from "@/assets/icons/global";
+import {
+  editIcon,
+  editIconOrange,
+  rightIconB,
+  rightIconW,
+} from "@/assets/icons/global";
 import {
   BuyStory,
   Costs,
   Datas,
   Likes,
+  UserDataEdit,
 } from "@/components/contact-tabSwitchers/index";
-import { useState, ReactNode } from "react";
+import { getDataFromCookie } from "@/helpers/cookie";
+import useAccountStore from "@/store/acount";
+import { useState, ReactNode, useMemo, useEffect } from "react";
 
 interface Tab {
   id: number;
@@ -15,17 +23,45 @@ interface Tab {
   title: string;
 }
 
-const AcountPage = () => {
+const AccountPage = () => {
+  const userID = getDataFromCookie("user_id");
+
   const [activeTabID, setActiveTabID] = useState(1);
+  const [isEditing, setIsEditing] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+  const { getUserData, userData } = useAccountStore();
 
-  const tab_list: Tab[] = [
-    { id: 1, tab: <Datas />, title: "Shaxsiy malumotlar" },
-    { id: 2, tab: <Likes />, title: "Yoqtirgan mahsulotlar" },
-    { id: 3, tab: <BuyStory />, title: "Xaridlar tarixi" },
-    { id: 4, tab: <Costs />, title: "To'lovlar tarixi" },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      setHasMounted(true);
+      await getUserData(userID);
+    };
+    fetchData();
+  }, [getUserData, userID]);
 
-  const activeTab = tab_list.find((tab) => tab.id === activeTabID);
+  const tabList: Tab[] = useMemo(
+    () => [
+      { id: 1, tab: <Datas />, title: "Shaxsiy malumotlar" },
+      { id: 2, tab: <Likes />, title: "Yoqtirgan mahsulotlar" },
+      { id: 3, tab: <BuyStory />, title: "Xaridlar tarixi" },
+      { id: 4, tab: <Costs />, title: "To'lovlar tarixi" },
+    ],
+    []
+  );
+
+  const activeTab = useMemo(() => {
+    return isEditing
+      ? { tab: <UserDataEdit user_data={userData} /> }
+      : tabList.find((tab) => tab.id === activeTabID);
+  }, [isEditing, activeTabID, tabList, userData]);
+
+  const handleEditTab = () => {
+    setIsEditing(true);
+  };
+
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <div className="container py-3 w-full">
@@ -35,27 +71,34 @@ const AcountPage = () => {
             <div className="flex justify-between items-center">
               <div className="bg-gray-300 rounded-full w-15 h-15" />
               <div className="ml-3 flex-1">
-                <b className="block">Ahmad Ben Bella</b>
-                <span className="text-gray-500">Id8937657921</span>
+                <b className="block">{ `${userData?.first_name} ${userData?.last_name}`  || "Loading..."}</b>
+                <span className="text-gray-500">ID: {userData?.id || "..."}</span>
               </div>
-              <button>{editIcon}</button>
+              <button onClick={handleEditTab}>
+                {isEditing ? editIconOrange : editIcon}
+              </button>
             </div>
 
             <div className="mt-8">
-              {tab_list.map((item) => (
+              {tabList.map((item) => (
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => setActiveTabID(item.id)}
+                  onClick={() => {
+                    setActiveTabID(item.id);
+                    setIsEditing(false);
+                  }}
                   className={`w-full rounded-lg flex items-center justify-center py-2 px-6 mb-2 ${
-                    activeTabID === item.id
+                    activeTabID === item.id && !isEditing
                       ? "bg-[#FF6F14] text-white"
                       : "bg-[#f0f0f0]"
                   }`}
                 >
                   <div className="flex gap-4 items-center justify-between w-full">
                     <span className="text-sm">{item.title}</span>
-                    {activeTabID !== item.id ? rightIconB : rightIconW}
+                    {activeTabID !== item.id || isEditing
+                      ? rightIconB
+                      : rightIconW}
                   </div>
                 </button>
               ))}
@@ -71,4 +114,4 @@ const AcountPage = () => {
   );
 };
 
-export default AcountPage;
+export default AccountPage;

@@ -48,28 +48,30 @@ const CategoryModal = () => {
       <div
         id="category-modal"
         className={`absolute left-0 w-full z-[1000] transition-transform duration-300 ${
-          open ? "translate-y-[-85px]" : "-translate-y-[850px]"
+          open ? "translate-y-[-80px]" : "-translate-y-[850px] bg-slate-500"
         }`}
         style={{ top: "200px" }}
         role="dialog"
         aria-hidden={!open}
       >
-        <div className="container w-[94%] rounded-lg bg-white shadow-xl px-16">
+        <div className="container rounded-lg bg-white shadow-xl">
           <div className="flex">
-            <div className="w-[30%] border-r-2 border-gray-200 grid place-content-center gap-3 p-8">
+            <div className="w-[30%] border-r-2 border-gray-200 grid place-content-cer gap-3 p-5">
               {categoriesData.map((category, index) => (
                 <button
                   type="button"
                   key={index}
-                  className={`w-[300px] rounded-lg flex items-center justify-center py-2 px-6 ${
+                  className={`w-full rounded-lg py-2 px-5 ${
                     selectedCategory === index
                       ? "bg-orange-500 text-white"
                       : "bg-[#f0f0f0]"
                   }`}
                   onClick={() => handleCategoryClick(index, category)}
                 >
-                  <div className="flex gap-4 items-center justify-between w-full">
-                    <span className="text-[14px]">{category.name}</span>
+                  <div className="flex gap-6 items-center justify-between w-full">
+                    <span className="md:text-[12px] lg:text-[13px] xl:text-[14px]">
+                      {category.name}
+                    </span>
                     {selectedCategory !== index ? rightIconB : rightIconW}
                   </div>
                 </button>

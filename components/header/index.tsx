@@ -26,10 +26,17 @@ const Header = () => {
   const [language, setLanguage] = useState("uz");
   const [drawerVisible, setDrawerVisible] = useState(false);
 
+  const showDrawer = () => {
+    setDrawerVisible(true);
+  };
+
+  const closeDrawer = () => {
+    setDrawerVisible(false);
+  };
+
   const handleLanguageChange = ({ key }: any) => {
     setLanguage(key);
   };
-
   const languageItems: MenuProps["items"] = [
     {
       key: "uz",
@@ -48,25 +55,29 @@ const Header = () => {
   const authItems: MenuProps["items"] = [
     {
       key: "1",
-      label: <Link href="signin">Tizimga kirish</Link>,
+      label: (
+        <Link onClick={closeDrawer} href="signin">
+          Tizimga kirish
+        </Link>
+      ),
     },
     {
       key: "2",
-      label: <Link href="signup">Ro'yxatdan o'tish</Link>,
+      label: (
+        <Link onClick={closeDrawer} href="signup">
+          Ro'yxatdan o'tish
+        </Link>
+      ),
     },
     {
       key: "3",
-      label: <Link href="acount">Acount</Link>,
+      label: (
+        <Link onClick={closeDrawer} href="acount">
+          Acount
+        </Link>
+      ),
     },
   ];
-
-  const showDrawer = () => {
-    setDrawerVisible(true);
-  };
-
-  const closeDrawer = () => {
-    setDrawerVisible(false);
-  };
 
   return (
     <>
@@ -152,7 +163,7 @@ const Header = () => {
         <ul className="flex flex-col gap-5">
           {navs.map((item, i) => (
             <li key={i}>
-              <Link href={item.path} onClick={closeDrawer} className="">
+              <Link href={item.path} onClick={closeDrawer}>
                 {item.title}
               </Link>
             </li>
@@ -163,6 +174,7 @@ const Header = () => {
             <Link
               href="/wishlist"
               className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] w-full rounded-lg"
+              onClick={closeDrawer}
             >
               {heartOutlineIcon}
               <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
@@ -180,6 +192,7 @@ const Header = () => {
             <Link
               href="/cart"
               className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg w-full"
+              onClick={closeDrawer}
             >
               {cartIcon}
               <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">

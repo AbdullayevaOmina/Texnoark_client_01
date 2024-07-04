@@ -1,10 +1,11 @@
+import { getDataFromCookie } from "@/helpers/cookie";
+
 const Datas = () => {
   const data = {
-    firstName: "Ism",
-    lastName: "Familiya",
-    phone: "+998 (99) 359-07-26",
-    address: "Surxandaryo.v/Denov.t/",
-    detailedAddress: "Yoshlik-1.k/12-honodon",
+    firstName: getDataFromCookie("first_name"),
+    lastName: getDataFromCookie("last_name"),
+    phone: getDataFromCookie("phone_number"),
+    email: getDataFromCookie("email"),
   };
 
   return (
@@ -21,12 +22,7 @@ const Datas = () => {
         <b className="text-gray-400 text-base">Tel:</b> <b>{data.phone}</b>
       </div>
       <div className="flex items-center gap-3">
-        <b className="text-gray-400 text-base">Manzili:</b>{" "}
-        <b>{data.address}</b>
-      </div>
-      <div className="flex items-center gap-3">
-        <b className="text-gray-400 text-base">Aniq manzil:</b>{" "}
-        <b>{data.detailedAddress}</b>
+        <b className="text-gray-400 text-base">Email:</b> <b>{data.email}</b>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import http from "@/api/interceptors";
-import { Product } from "@/types/product-types";
 import { create } from "zustand";
 
 interface GetAllWishlist {
@@ -8,16 +7,16 @@ interface GetAllWishlist {
 }
 
 interface WishlistStore {
-  datawishlist: Product[];
+  dataWishlist: [];
   dataLength: number;
   isLoading: boolean;
   totalCount: number;
   getAllWishlist: (params: GetAllWishlist) => Promise<void>;
-  create: (id: string) => Promise<void>;
+  likePost: (id: number) => Promise<void>;
 }
 
 const useWishlistStore = create<WishlistStore>((set) => ({
-  datawishlist: [],
+  dataWishlist: [],
   isLoading: false,
   totalCount: 1,
   dataLength: 0,
@@ -25,7 +24,7 @@ const useWishlistStore = create<WishlistStore>((set) => ({
   getAllWishlist: async (params: GetAllWishlist) => {
     set({ isLoading: true });
     try {
-      const response = await http.get(`/wishlist`, {
+      const response = await http.get(`/likes`, {
         params: {
           page: params.page,
           limit: params.limit,
@@ -36,29 +35,30 @@ const useWishlistStore = create<WishlistStore>((set) => ({
         const { total_count, products } = response.data;
         set({
           totalCount: Math.ceil(total_count / params.limit),
-          datawishlist: products,
+          dataWishlist: products,
           dataLength: products.length,
         });
       }
     } catch (error) {
       console.error("Error fetching wishlist:", error);
-      set({ totalCount: 0, datawishlist: [], dataLength: 0 });
+      set({ totalCount: 0, dataWishlist: [], dataLength: 0 });
     } finally {
       set({ isLoading: false });
     }
   },
 
-  create: async (id: string) => {
+  likePost: async (id: number) => {
     set({ isLoading: true });
     try {
-      const response = await http.post(`/like/${id}`);
-      if (response.status === 201) {
-        const datawishlist = response.data;
-        set((state) => ({
-          dataLength: state.dataLength + (datawishlist ? 1 : -1),
-        }));
-      }
-      return response.data;
+      const response = await http.post(`/likes/create`, { product_id: id });
+      console.log(response);
+      // if (response.status === 201) {
+      //   const dataWishlist = response.data;
+      //   set((state) => ({
+      //     dataLength: state.dataLength + (dataWishlist ? 1 : -1),
+      //   }));
+      // }
+      // return response.data;
     } catch (error) {
       console.error("Error liking product:", error);
     } finally {

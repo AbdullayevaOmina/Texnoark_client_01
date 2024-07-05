@@ -1,9 +1,5 @@
 interface UserDataEditProps {
-  user_data: {
-    name: string;
-    id: string;
-    // Add other fields as necessary
-  };
+  user_data: any;
 }
 
 const UserDataEdit = ({ user_data }: UserDataEditProps) => {

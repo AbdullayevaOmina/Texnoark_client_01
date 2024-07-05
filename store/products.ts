@@ -18,8 +18,6 @@ const useProductStore = create<ProductStoreState>((set) => ({
         },
       });
 
-      console.log(response);
-
       if (response.status === 200) {
         const { count, products } = response?.data?.data;
         set({

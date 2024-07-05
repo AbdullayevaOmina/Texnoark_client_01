@@ -24,19 +24,21 @@ interface Tab {
 }
 
 const AccountPage = () => {
-  const userID = getDataFromCookie("user_id");
-
-  const [activeTabID, setActiveTabID] = useState(1);
-  const [isEditing, setIsEditing] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
+  const [activeTabID, setActiveTabID] = useState<number>(1);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [hasMounted, setHasMounted] = useState<boolean>(false);
   const { getUserData, userData } = useAccountStore();
 
+  const userID = getDataFromCookie("user_id");
+
   useEffect(() => {
-    const fetchData = async () => {
-      setHasMounted(true);
-      await getUserData(userID);
-    };
-    fetchData();
+    setHasMounted(true);
+    if (userID) {
+      const fetchData = async () => {
+        await getUserData(userID);
+      };
+      fetchData();
+    }
   }, [getUserData, userID]);
 
   const tabList: Tab[] = useMemo(
@@ -72,11 +74,12 @@ const AccountPage = () => {
               <div className="bg-gray-300 rounded-full w-15 h-15" />
               <div className="ml-3 flex-1">
                 <b className="block">
-                  {`${userData?.first_name} ${userData?.last_name}` ||
-                    "Loading..."}
+                  {`${userData?.first_name ?? "Loading..."} ${
+                    userData?.last_name ?? ""
+                  }`}
                 </b>
                 <span className="text-gray-500">
-                  ID: {userData?.id || "..."}
+                  ID: {userData?.id ?? "..."}
                 </span>
               </div>
               <button onClick={handleEditTab}>
@@ -119,4 +122,24 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+const Fallback = () => {
+  return <div>User ID not found. Please log in.</div>;
+};
+
+const ConditionalExport = () => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
+  const userID = getDataFromCookie("user_id");
+
+  return userID ? <AccountPage /> : <Fallback />;
+};
+
+export default ConditionalExport;

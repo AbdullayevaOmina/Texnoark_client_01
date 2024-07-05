@@ -1,11 +1,16 @@
 import http from "@/api/interceptors";
 import { create } from "zustand";
+interface AcountStoreState {
+  userData: any;
+  isLoading: boolean;
+  getUserData: (userID: any) => Promise<void>;
+}
 
-const useAccountStore = create((set) => ({
+const useAccountStore = create<AcountStoreState>((set) => ({
   userData: [],
   isLoading: false,
 
-  getUserData: async (userID: number) => {
+  getUserData: async (userID) => {
     set({ isLoading: true });
     try {
       const response = await http.get(`/users/${userID}`);

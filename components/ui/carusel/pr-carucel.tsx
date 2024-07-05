@@ -7,11 +7,14 @@ import "swiper/css/navigation";
 import { Navigation, Mousewheel, Thumbs } from "swiper/modules";
 import Link from "next/link";
 import "./pr-carucel.css";
-import { Product } from "@/types/product-types";
 import { useEffect } from "react";
 import useProductStore from "@/store/products";
 
-const ProductsCarucel = ({ title }: any) => {
+interface ProductsCarouselProps {
+  title: string;
+}
+
+const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
   const { getAllProducts, dataProducts, isLoading } = useProductStore();
 
   useEffect(() => {

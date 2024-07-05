@@ -36,4 +36,5 @@ export interface ProductStoreState {
   isLoading: boolean;
   totalCount: number;
   getAllProducts: (params: GetAll) => Promise<void>;
+  getProduct: (id: any) => Promise<void>;
 }

@@ -9,10 +9,13 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./style.css";
 
-import prImg from "@/assets/images/product-img.png";
 import Image from "next/image";
 
-export default function ImgGallery() {
+interface ImgGalleryProps {
+  productImages: string[];
+}
+
+const ImgGallery: React.FC<ImgGalleryProps> = ({ productImages }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperInstance | null>(null);
 
   return (
@@ -29,13 +32,18 @@ export default function ImgGallery() {
         modules={[FreeMode, Navigation, Mousewheel]}
         className="mySwiper"
       >
-        {[1, 2, 4, 5, 6, 7, 8].map((item) => (
+        {productImages.map((image, index) => (
           <SwiperSlide
-            key={item}
-            className="bg-white p-3 rounded-lg cursor-pointer "
+            key={index}
+            className="bg-white p-3 rounded-lg cursor-pointer"
           >
             <div className="flex items-center justify-center">
-              <Image src={prImg} alt="im" />
+              <Image
+                src={image}
+                alt={`Product Image ${index + 1}`}
+                width={100}
+                height={100}
+              />
             </div>
           </SwiperSlide>
         ))}
@@ -45,21 +53,27 @@ export default function ImgGallery() {
         spaceBetween={20}
         navigation
         thumbs={{ swiper: thumbsSwiper }}
-        // mousewheel={true}
         modules={[FreeMode, Navigation, Thumbs, Mousewheel]}
         className="mySwiper2"
       >
-        {[1, 2, 4, 5, 6, 7, 8].map((item) => (
+        {productImages.map((image, index) => (
           <SwiperSlide
-            key={item}
+            key={index}
             className="bg-white p-6 rounded-lg w-[660px] h-[560px]"
           >
             <div className="flex items-center justify-center">
-              <Image src={prImg} alt="im" />
+              <Image
+                src={image}
+                alt={`Product Image ${index + 1}`}
+                layout="fill"
+                objectFit="contain"
+              />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
   );
-}
+};
+
+export default ImgGallery;

@@ -3,6 +3,7 @@ import { furgonIcon, homeIcon, soatIcon } from "@/assets/icons/global";
 import ImgGallery from "@/components/ui/imggallery";
 import Image from "next/image";
 import shivakiImg from "@/assets/images/shivaki.png";
+import singlePrPageReklamaImg from "@/assets/images/singlePrPageReklamaImg.png";
 import Link from "next/link";
 import ProductsCarousel from "@/components/ui/carusel/pr-carucel";
 import { getDataFromCookie } from "@/helpers/cookie";
@@ -113,23 +114,11 @@ const SingleProductPage = () => {
                   )
                 )}
               </div>
-              <div className="hidden w-full md:w-[40%] bg-white rounded-lg p-8 lg:flex flex-col items-center gap-3">
-                <Image
-                  src={shivakiImg}
-                  alt="img"
-                  className="w-[360px] h-[104px] lg:w-[360px] lg:h-[104px]"
-                />
-                <div className="relative">
-                  <h1 className="bg-[#ff6f14] text-white px-3 p-1 rounded-lg text-[30px] font-bold">
-                    Shivakini mahsulotlaridan <br /> harid qiling
-                  </h1>
-                  <div className="absolute top-12 right-0 bg-white rounded-l-lg text-center flex flex-col items-center justify-center">
-                    <b className="text-[85px] font-bold text-[#1EB91E] block pl-3">
-                      30%
-                    </b>
-                    <b className="text-[#ff6f14]">Chegirmaga ega bo‘ling</b>
-                  </div>
-                </div>
+              <div
+                className="hidden w-full md:w-[40%] bg-white rounded-lg p-8 lg:flex flex-col 
+              items-center gap-3"
+              >
+                <Image src={singlePrPageReklamaImg} alt="img" />
               </div>
             </div>
           </div>

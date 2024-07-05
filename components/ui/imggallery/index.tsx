@@ -57,11 +57,8 @@ const ImgGallery: React.FC<ImgGalleryProps> = ({ productImages }) => {
         className="mySwiper2"
       >
         {productImages.map((image, index) => (
-          <SwiperSlide
-            key={index}
-            className="bg-white p-6 rounded-lg w-[660px] h-[560px]"
-          >
-            <div className="flex items-center justify-center">
+          <SwiperSlide key={index} className="bg-white rounded-lg">
+            <div className="">
               <Image
                 src={image}
                 alt={`Product Image ${index + 1}`}

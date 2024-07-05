@@ -3,26 +3,28 @@ import { GetAll, ProductStoreState } from "@/types/product-types";
 import { create } from "zustand";
 
 const useProductStore = create<ProductStoreState>((set) => ({
-  data: [],
+  dataProducts: [],
   isLoading: false,
   totalCount: 1,
 
-  getAll: async (params: GetAll) => {
+  getAllProducts: async (params: GetAll) => {
     set({ isLoading: true });
     try {
-      const response = await http.get(`/products`, {
+      const response = await http.get(`/products/search`, {
         params: {
           page: params.page,
           limit: params.limit,
-          name: params.name,
+          search: params.search,
         },
       });
 
+      console.log(response);
+
       if (response.status === 200) {
-        const { total_count, products } = response.data;
+        const { count, products } = response?.data?.data;
         set({
-          totalCount: Math.ceil(total_count / params.limit),
-          data: products,
+          totalCount: Math.ceil(count / params.limit),
+          dataProducts: products,
         });
       }
     } catch (error) {

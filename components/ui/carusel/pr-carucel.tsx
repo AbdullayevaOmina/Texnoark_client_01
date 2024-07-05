@@ -7,57 +7,55 @@ import "swiper/css/navigation";
 import { Navigation, Mousewheel, Thumbs } from "swiper/modules";
 import Link from "next/link";
 import "./pr-carucel.css";
+import { Product } from "@/types/product-types";
 
-const ProductsCarucel = ({ title }: any) => {
+interface ProductsCarouselProps {
+  title: string;
+  data: Product[];
+}
+
+const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title, data }) => {
+  console.log(data);
   return (
     <div>
-      <div className="container flex justify-between items-center my-3 sm:my-4 md:my-8 lg:my-10">
-        <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
-          {title}
-        </b>
-        <Link
-          href={"/products"}
-          className="text-[#1EB91E] border-[#1EB91E] bg-white border flex items-center rounded-lg px-[20px] py-[4px] sm:py-[6px] md:py-[8px] lg:py-[13px] gap-2 text-[12px] sm:text-[14px] md:text-[16px]"
-        >
-          Hammasi {rightGreenIcon}
-        </Link>
-      </div>
-      <div>
-        <Swiper
-      
-          modules={[Navigation, Mousewheel, Thumbs]}
-          navigation
-          // mousewheel={true}
-
-          spaceBetween={0}
-          slidesPerView={4}
-          breakpoints={{
-            0: { slidesPerView: 1, spaceBetween: 2 },
-            320: {
-              slidesPerView: 2,
-              spaceBetween: 5,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 10,
-            },
-            1900: {
-              slidesPerView: 5,
-              spaceBetween: 10,
-            },
-          }}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
-            <SwiperSlide key={item}>
-              <ProductCard />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      {Array.isArray(data) && data.length > 0 ? (
+        <>
+          <div className="container flex justify-between items-center my-3 sm:my-4 md:my-8 lg:my-10">
+            <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
+              {title}
+            </b>
+            <Link
+              href={"/products"}
+              className="text-[#1EB91E] border-[#1EB91E] bg-white border flex items-center rounded-lg px-[20px] py-[4px] sm:py-[6px] md:py-[8px] lg:py-[13px] gap-2 text-[12px] sm:text-[14px] md:text-[16px]"
+            >
+              Hammasi {rightGreenIcon}
+            </Link>
+          </div>
+          <div className="mx-5">
+            <Swiper
+              modules={[Navigation, Mousewheel, Thumbs]}
+              navigation
+              spaceBetween={0}
+              slidesPerView={4}
+              breakpoints={{
+                0: { slidesPerView: 1, spaceBetween: 2 },
+                320: { slidesPerView: 2, spaceBetween: 5 },
+                768: { slidesPerView: 3, spaceBetween: 10 },
+                1024: { slidesPerView: 4, spaceBetween: 10 },
+                1900: { slidesPerView: 5, spaceBetween: 10 },
+              }}
+            >
+              {data.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <ProductCard product={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

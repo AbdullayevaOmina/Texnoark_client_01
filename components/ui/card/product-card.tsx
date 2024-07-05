@@ -6,22 +6,26 @@ import {
   statistikIcon,
 } from "@/assets/icons/global";
 import Image from "next/image";
-import pr_img from "@/assets/images/product-img.png";
 import { setDataFromCookie } from "@/helpers/cookie";
 import useWishlistStore from "@/store/wishlist-store";
+import { Product } from "@/types/product-types";
 
-const ProductCard = () => {
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
   const { likePost } = useWishlistStore();
 
-  const viewSingleProduct = (product_id: any) => {
-    setDataFromCookie("product_id", product_id);
-    router.push(`/products/${product_id}`);
+  const viewSingleProduct = (id: number) => {
+    setDataFromCookie("product_id", id);
+    router.push(`/products/${id}`);
   };
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    await likePost(8);
+    await likePost(product.id);
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -34,47 +38,49 @@ const ProductCard = () => {
     // Statistik functionality here
   };
 
+  const monthlyPayment = (+product.price / 12).toFixed(2);
+
   return (
     <div
-      className="bg-white rounded-lg p-[27px] flex flex-col justify-between cursor-pointer w-[240px] h-[350px] md:w-[260px] md:h-[420px] lg:w-[305px] lg:h-[460px] "
-      onClick={() => viewSingleProduct("1")}
+      className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[240px] h-[350px] md:w-[260px] md:h-[380px] lg:w-[305px] lg:h-[420px] "
+      onClick={() => viewSingleProduct(product.id)}
     >
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center">
         <Image
-          src={pr_img}
-          alt="img"
+          src={product.images[0]}
+          alt={product.name}
           width={200}
           height={200}
-          className="w-[120px] sm:w-[140px] md:w-[180px] lg:w-[200px]"
+          className="lg:h-[180px]"
         />
       </div>
-      <div className="grid md:gap-2 gap-2">
+      <div className="grid gap-1 md:gap-2">
         <h3 className="text-[13px] md:text-[16px] text-gray-700">
-          Kir yuvish mashinasi LG F2V7GW9T
+          {product.name}
         </h3>
         <b>
-          8 279 000 <small>so'm</small>
+          {product.price} <small>so'm</small>
         </b>
         <div className="bg-[#edfaed] text-[#1EB91E] text-center rounded-lg py-1 text-[12px]">
-          1 134 890 so'mdan/12 oy
+          {monthlyPayment} so'mdan/12 oy
         </div>
       </div>
       <div className="flex justify-between items-center mt-2 md:mt-3">
         <button
-          className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-[10px] py-[10px] sm:px-[25px] sm:py-[12px] text-[14px]"
+          className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-3 py-2 md:px-6 md:py-3 text-[14px]"
           onClick={handleAddToCart}
         >
           {addToCartIcon} <span className="hidden md:flex">Savat</span>
         </button>
         <button
           onClick={handleLike}
-          className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg"
+          className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
         >
           {heartOutlineIcon}
         </button>
         <button
           onClick={handleStatistik}
-          className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[12px] sm:py-[14px] px-[14px] sm:px-[17px] rounded-lg"
+          className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
         >
           {statistikIcon}
         </button>
@@ -82,4 +88,5 @@ const ProductCard = () => {
     </div>
   );
 };
+
 export default ProductCard;

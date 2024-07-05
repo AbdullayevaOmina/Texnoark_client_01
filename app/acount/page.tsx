@@ -71,8 +71,13 @@ const AccountPage = () => {
             <div className="flex justify-between items-center">
               <div className="bg-gray-300 rounded-full w-15 h-15" />
               <div className="ml-3 flex-1">
-                <b className="block">{ `${userData?.first_name} ${userData?.last_name}`  || "Loading..."}</b>
-                <span className="text-gray-500">ID: {userData?.id || "..."}</span>
+                <b className="block">
+                  {`${userData?.first_name} ${userData?.last_name}` ||
+                    "Loading..."}
+                </b>
+                <span className="text-gray-500">
+                  ID: {userData?.id || "..."}
+                </span>
               </div>
               <button onClick={handleEditTab}>
                 {isEditing ? editIconOrange : editIcon}

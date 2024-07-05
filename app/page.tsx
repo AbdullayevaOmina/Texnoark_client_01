@@ -31,12 +31,9 @@ export default function Home() {
       </div>
       {dataProducts.length > 0 && (
         <>
-          <ProductsCarucel title="Ommabob mahsulotlar" data={dataProducts} />
-          <ProductsCarucel
-            title="Populyarniy mahsulotlar"
-            data={dataProducts}
-          />
-          <ProductsCarucel title="Aksiyadagi mahsulotlar" data={dataProducts} />
+          <ProductsCarucel title="Ommabob mahsulotlar" />
+          <ProductsCarucel title="Populyarniy mahsulotlar" />
+          <ProductsCarucel title="Aksiyadagi mahsulotlar" />
         </>
       )}
       <BrandsSection />

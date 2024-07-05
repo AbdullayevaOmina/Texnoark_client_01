@@ -8,17 +8,26 @@ import { Navigation, Mousewheel, Thumbs } from "swiper/modules";
 import Link from "next/link";
 import "./pr-carucel.css";
 import { Product } from "@/types/product-types";
+import { useEffect } from "react";
+import useProductStore from "@/store/products";
 
-interface ProductsCarouselProps {
-  title: string;
-  data: Product[];
-}
+const ProductsCarucel = ({ title }: any) => {
+  const { getAllProducts, dataProducts, isLoading } = useProductStore();
 
-const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title, data }) => {
-  console.log(data);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        await getAllProducts({ page: 1, limit: 100, search: "" });
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, [getAllProducts]);
+
   return (
     <div>
-      {Array.isArray(data) && data.length > 0 ? (
+      {Array.isArray(dataProducts) && dataProducts.length > 0 ? (
         <>
           <div className="container flex justify-between items-center my-3 sm:my-4 md:my-8 lg:my-10">
             <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
@@ -45,7 +54,7 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title, data }) => {
                 1900: { slidesPerView: 5, spaceBetween: 10 },
               }}
             >
-              {data.map((item) => (
+              {dataProducts.map((item) => (
                 <SwiperSlide key={item.id}>
                   <ProductCard product={item} />
                 </SwiperSlide>

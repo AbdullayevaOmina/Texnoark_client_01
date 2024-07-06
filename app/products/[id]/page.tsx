@@ -2,18 +2,19 @@
 import { furgonIcon, homeIcon, soatIcon } from "@/assets/icons/global";
 import ImgGallery from "@/components/ui/imggallery";
 import Image from "next/image";
-import shivakiImg from "@/assets/images/shivaki.png";
 import singlePrPageReklamaImg from "@/assets/images/singlePrPageReklamaImg.png";
 import Link from "next/link";
 import ProductsCarousel from "@/components/ui/carusel/pr-carucel";
 import { getDataFromCookie } from "@/helpers/cookie";
 import useProductStore from "@/store/products";
 import { useEffect, useState } from "react";
+import CommentsTab from "@/components/product-tabSwitcher/comments";
 
 const SingleProductPage = () => {
   const product_id = getDataFromCookie("product_id");
   const { getProduct } = useProductStore();
   const [productData, setProductData] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState("specs");
 
   useEffect(() => {
     async function fetchProduct() {
@@ -28,10 +29,11 @@ const SingleProductPage = () => {
       {productData ? (
         <>
           <div className="container my-5 flex flex-col lg:flex-row gap-5">
-            <div className="w-full lg:w-[70%]">
+            <div className="w-full lg:w-[60%]">
               <ImgGallery productImages={productData?.product?.images} />
             </div>
-            <div className="w-full lg:w-[30%]">
+
+            <div className="w-full lg:w-[40%]">
               <div className="bg-white rounded-lg p-5">
                 <h1 className="font-bold">{productData?.product?.name}</h1>
                 <div className="flex items-center gap-5 my-4 text-gray-500">
@@ -86,41 +88,60 @@ const SingleProductPage = () => {
               </div>
             </div>
           </div>
+          <div className="container my-8">
+            <b className="block my-3 text-2xl">Qurilma ma'lumotlari</b>
+            {productData?.product_detail?.description ||
+              "No description available"}
+          </div>
           <div className="container mt-10">
             <div className="flex flex-col md:flex-row gap-5 my-4">
-              <button className="h-[40px] px-5 bg-[#FF6F14] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
+              <button
+                className={`h-[40px] px-5 ${
+                  activeTab === "specs"
+                    ? "bg-[#FF6F14] text-white"
+                    : "bg-white text-black"
+                } rounded-lg font-bold text-[12px] flex justify-center items-center gap-3`}
+                onClick={() => setActiveTab("specs")}
+              >
                 Telfon xususiyatlari
               </button>
-              <button className="h-[40px] px-5 rounded-lg bg-white font-bold text-[12px] flex justify-center items-center gap-3">
+              <button
+                className={`h-[40px] px-5 ${
+                  activeTab === "comments"
+                    ? "bg-[#FF6F14] text-white"
+                    : "bg-white text-black"
+                } rounded-lg font-bold text-[12px] flex justify-center items-center gap-3`}
+                onClick={() => setActiveTab("comments")}
+              >
                 Mijozlarni fikri
               </button>
             </div>
-            <div className="container my-8">
-              <b className="block my-3 text-2xl">Description</b>
-              {productData?.product_detail?.description ||
-                "No description available"}
-            </div>
-            <div className="flex flex-col md:flex-row gap-5">
-              <div className="bg-[#f5f5f5] p-8 w-full md:w-[60%] rounded-lg">
-                {productData?.product_detail?.specs?.map(
-                  (spec: { name: string; value: string }, index: number) => (
-                    <div
-                      key={index}
-                      className="w-full flex border-b-2 border-dashed border-gray-400 py-3"
-                    >
-                      <h1 className="flex-1">{spec.name}</h1>
-                      <h1 className="flex-1">{spec.value}</h1>
-                    </div>
-                  )
-                )}
-              </div>
-              <div
-                className="hidden w-full md:w-[40%] bg-white rounded-lg p-8 lg:flex flex-col 
+
+            {activeTab === "specs" ? (
+              <div className="flex flex-col md:flex-row gap-5">
+                <div className="bg-[#f5f5f5] p-8 w-full md:w-[60%] rounded-lg">
+                  {productData?.product_detail?.specs?.map(
+                    (spec: { name: string; value: string }, index: number) => (
+                      <div
+                        key={index}
+                        className="w-full flex border-b-2 border-dashed border-gray-400 py-3"
+                      >
+                        <h1 className="flex-1">{spec.name}</h1>
+                        <h1 className="flex-1">{spec.value}</h1>
+                      </div>
+                    )
+                  )}
+                </div>
+                <div
+                  className="hidden w-full md:w-[40%] bg-white rounded-lg p-8 lg:flex flex-col 
               items-center gap-3"
-              >
-                <Image src={singlePrPageReklamaImg} alt="img" />
+                >
+                  <Image src={singlePrPageReklamaImg} alt="img" />
+                </div>
               </div>
-            </div>
+            ) : (
+              <CommentsTab />
+            )}
           </div>
         </>
       ) : (

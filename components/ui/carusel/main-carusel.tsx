@@ -10,7 +10,7 @@ const MainCarusel = () => {
         className="mt-2 md:mt-4 lg:mt-5 rounded-lg arrows"
       >
         {[1, 2, 3, 4].map((i) => (
-          <Image src={cimg} alt="img" key={i} className="rounded-lg" />
+          <Image src={cimg} alt="img" key={i} className="rounded-lg " />
         ))}
       </Carousel>
     </>

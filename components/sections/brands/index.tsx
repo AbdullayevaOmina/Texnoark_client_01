@@ -16,9 +16,9 @@ const BrandsSection = () => {
             cards.push(
               <div
                 key={index}
-                className="w-[100px] h-[50px]  md:w-[150px] md:h-[110px] lg:w-[200px] lg:h-[130px] bg-white rounded-lg flex items-center justify-center p-2 py-5"
+                className="w-[100px] h-[50px]  md:w-[150px] md:h-[110px] lg:w-[200px] lg:h-[130px] bg-white rounded-lg flex items-center justify-center px-1"
               >
-                <Image src={img} alt="brand_img" className="" />
+                <Image src={img} alt="brand_img" className="p-3 m-3 md:p-1" />
               </div>
             );
             index++;

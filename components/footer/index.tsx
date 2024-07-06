@@ -30,7 +30,7 @@ const Footer = () => {
             </b>
           </Link>
           <div>
-            <b className="text-[16px] sm:text-[18px] mt-8 block mb-5">
+            <b className="text-[14px] sm:text-[16px] md:text-[18px] mt-8 block mb-5">
               Bizni ijtimoiyi tarmoqlar
             </b>
             <div className="flex gap-3">
@@ -47,36 +47,38 @@ const Footer = () => {
           </div>
         </div>
 
-        <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
-          <b className="text-[16px] sm:text-[18px] text-black mb-3 block">
-            Tashkilot haqida
-          </b>
-          <li className="hover:text-black cursor-pointer">Texnoark haqida</li>
-          <li className="hover:text-black cursor-pointer">
-            Muddatli to&apos;lov
-          </li>
-          <li className="hover:text-black cursor-pointer">Yordam</li>
-          <li className="hover:text-black cursor-pointer">
-            Tovarlarga kafolat
-          </li>
-          <li className="hover:text-black cursor-pointer">
-            To&apos;lov usullari
-          </li>
-        </ul>
-
-        <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
-          <b className="text-[16px] sm:text-[18px] text-black mb-3 block">
-            Kategoriya
-          </b>
-          {categoriesData.map((item, index) => (
-            <li key={index} className="hover:text-black cursor-pointer">
-              {item.name}
+        <div className="flex gap-5 flex-2 w-full ml-0 lg:ml-8">
+          <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
+            <b className="text-[14px] sm:text-[16px] md:text-[18px] text-black mb-3 block">
+              Tashkilot haqida
+            </b>
+            <li className="hover:text-black cursor-pointer">Texnoark haqida</li>
+            <li className="hover:text-black cursor-pointer">
+              Muddatli to&apos;lov
             </li>
-          ))}
-        </ul>
+            <li className="hover:text-black cursor-pointer">Yordam</li>
+            <li className="hover:text-black cursor-pointer">
+              Tovarlarga kafolat
+            </li>
+            <li className="hover:text-black cursor-pointer">
+              To&apos;lov usullari
+            </li>
+          </ul>
 
-        <ul className="text-gray-500 text-[14px] flex-1">
-          <b className="text-[16px] sm:text-[18px] text-black">
+          <ul className="text-gray-400 text-[14px] flex-1 flex flex-col gap-2">
+            <b className="text-[14px] sm:text-[16px] md:text-[18px]  text-black mb-3 block">
+              Kategoriya
+            </b>
+            {categoriesData.map((item, index) => (
+              <li key={index} className="hover:text-black cursor-pointer">
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul className="text-gray-500 text-[14px] flex-2">
+          <b className="text-[14px] sm:text-[16px] md:text-[18px] text-black">
             Biz bilan aloqa
           </b>
           <li className="flex items-center gap-2 sm:gap-5 mt-4">

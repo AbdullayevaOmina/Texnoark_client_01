@@ -29,6 +29,7 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #e06c1f;
+  cursor: pointer;
 }
 
 /* Responsive styles */

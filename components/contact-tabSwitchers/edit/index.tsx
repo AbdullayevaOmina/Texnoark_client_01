@@ -39,7 +39,7 @@ const UserDataEdit = ({ user_data }: UserDataEditProps) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg">
+    <div className="p-10 px-16 bg-white rounded-lg">
       <h2 className="text-lg font-bold mb-4">Malumotlarni tahrirlash</h2>
       <Formik
         initialValues={initialValues}

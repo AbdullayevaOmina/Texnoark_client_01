@@ -40,7 +40,6 @@ const AccountPage = () => {
       fetchData();
     }
   }, [getUserData, userID]);
-  
 
   const tabList: Tab[] = useMemo(
     () => [
@@ -115,9 +114,7 @@ const AccountPage = () => {
           </div>
         </div>
 
-        <div className="p-5 w-full lg:w-2/3 bg-white rounded-lg">
-          {activeTab && activeTab.tab}
-        </div>
+        <div className="w-full lg:w-2/3">{activeTab && activeTab.tab}</div>
       </div>
     </div>
   );

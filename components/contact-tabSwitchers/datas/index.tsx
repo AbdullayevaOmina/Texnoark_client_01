@@ -9,7 +9,7 @@ const Datas = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-3 px-8">
+    <div className="flex flex-col justify-center gap-3 px-8 bg-white rounded-lg p-10">
       <b className="text-2xl">Shaxsiy malumotlar</b>
       <div className="flex items-center gap-3">
         <b className="text-gray-400 text-base">Ism:</b> <b>{data.firstName}</b>

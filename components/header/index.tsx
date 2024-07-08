@@ -10,20 +10,34 @@ import {
   barsIcon,
   userIcon,
 } from "@/assets/icons/global";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
 import CategoryModal from "../ui/modals/Category";
 import useWishlistStore from "@/store/wishlist-store";
+import { getDataFromCookie } from "@/helpers/cookie";
 
 const Header = () => {
-  const { countLikes } = useWishlistStore();
+  const { countLikes, getAllWishlist } = useWishlistStore();
   const navs = [
     { title: "Biz haqimizda", path: "/about" },
     { title: "Yetkazib berish", path: "/delivery" },
     { title: "Shartnoma shartlari", path: "/contracts" },
     { title: "Bizning kafolatlar", path: "/assurances" },
   ];
+
+  const user_id = getDataFromCookie("user_id");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        await getAllWishlist(user_id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchProducts();
+  }, [getAllWishlist]);
 
   const [language, setLanguage] = useState("uz");
   const [drawerVisible, setDrawerVisible] = useState(false);

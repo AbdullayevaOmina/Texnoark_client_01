@@ -28,27 +28,25 @@ interface WishlistItemData {
 
 const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
   const { getAllProducts, dataProducts } = useProductStore();
-  const { getAllWishlist, dataWishlist } = useWishlistStore();
-  const user_id = getDataFromCookie("user_id");
+  const { dataWishlist } = useWishlistStore();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         await getAllProducts({ page: 1, limit: 100, search: "" });
-        await getAllWishlist(user_id);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     fetchProducts();
-  }, [getAllProducts, getAllWishlist]);
+  }, [getAllProducts]);
 
   const isProductInWishlist = (productId: number) =>
     dataWishlist.some(
       (wishlistItem: WishlistItemData) =>
         wishlistItem?.product_id?.id === productId
     );
-    
+
   return (
     <div>
       {Array.isArray(dataProducts) && dataProducts.length > 0 ? (

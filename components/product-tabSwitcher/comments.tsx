@@ -9,21 +9,24 @@ import { CommentData } from "@/types/comment-types";
 import { smileEmojiIcon } from "@/assets/icons/global";
 
 const CommentsTab = () => {
-  const prID:any = getDataFromCookie("product_id");
+  const prID: any = getDataFromCookie("product_id");
   const { getComments, countComment, dataComments, createComment } =
     useCommentStore();
   const [comment, setComment] = useState<string>("");
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     async function getCm() {
-      await getComments(prID);
+      if (prID) {
+        await getComments(prID);
+      }
     }
     getCm();
   }, [prID, getComments]);
 
   const handleEmojiSelect = (emoji: any) => {
-    setComment(comment + emoji.native);
+    setComment((prevComment) => prevComment + emoji.native);
     setShowEmojiPicker(false);
   };
 
@@ -33,14 +36,18 @@ const CommentsTab = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createComment({
-      comment: comment,
-      product_id: +prID,
-    });
-    console.log("Comment submitted:", comment);
+    if (prID) {
+      setIsSubmitting(true);
+      const resStatus = await createComment({
+        comment,
+        product_id: parseInt(prID, 10),
+      });
+      if (resStatus === 201) {
+        setComment("");
+      }
+      setIsSubmitting(false);
+    }
   };
-
-  console.log(dataComments);
 
   return (
     <div className="w-full p-8 rounded-lg bg-white grid gap-3">
@@ -85,8 +92,9 @@ const CommentsTab = () => {
             <button
               type="submit"
               className="bg-[#FF6F14] text-white rounded-lg p-1 w-full"
+              disabled={isSubmitting}
             >
-              Jo'natish
+              {isSubmitting ? "Yuborilmoqda" : "Yuborish"}
             </button>
           </div>
         </form>

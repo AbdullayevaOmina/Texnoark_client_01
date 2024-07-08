@@ -20,16 +20,16 @@ export interface CommentData {
   user_id: UserData;
 }
 
-interface CreateComent {
+export interface CreateComment {
   comment: string;
   product_id: number;
 }
 
-export interface CommnetsStoreState {
-  dataComments: any[];
+export interface CommentsStoreState {
+  dataComments: CommentData[];
   isLoading: boolean;
   totalCount: number;
   countComment: number;
-  getComments: (id: any) => Promise<void>;
-  createComment: (comment: CreateComent) => Promise<void>;
+  getComments: (id: string) => Promise<number | undefined>;
+  createComment: (comment: CreateComment) => Promise<number | undefined>;
 }

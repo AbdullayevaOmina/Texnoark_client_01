@@ -92,7 +92,7 @@ const Header = () => {
           ))}
         </ul>
         <div className="hidden md:flex gap-8 items-center">
-          <h1 className="flex items-center gap-2">+998 (99) 359-07-26</h1>
+          <h1 className="flex items-center gap-2">+998 (99) 123-45-67</h1>
           <Dropdown
             menu={{ items: languageItems, onClick: handleLanguageChange }}
             placement="bottom"

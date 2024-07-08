@@ -1,16 +1,9 @@
 import http from "@/api/interceptors";
 import { create } from "zustand";
-
-interface GetAllWishlist {
-  page: number;
-  limit: number;
-}
-
 interface WishlistStore {
   dataWishlist: [];
   countLikes: number;
   isLoading: boolean;
-  // totalCount: number;
   getAllWishlist: (id: any) => Promise<void>;
   likePost: (id: number) => Promise<void>;
 }
@@ -18,7 +11,6 @@ interface WishlistStore {
 const useWishlistStore = create<WishlistStore>((set) => ({
   dataWishlist: [],
   isLoading: false,
-  // totalCount: 1,
   countLikes: 0,
 
   getAllWishlist: async (id) => {
@@ -43,14 +35,16 @@ const useWishlistStore = create<WishlistStore>((set) => ({
     set({ isLoading: true });
     try {
       const response = await http.post(`/likes/create`, { product_id: id });
-      console.log(response);
-      // if (response.status === 201) {
-      //   const dataWishlist = response.data;
-      //   set((state) => ({
-      //     countLikes: state.countLikes + (dataWishlist ? 1 : -1),
-      //   }));
-      // }
-      return response.data.statusCode;
+      if (response?.data?.statusCode === 201) {
+        set((state) => ({
+          countLikes: state.countLikes + 1,
+        }));
+      } else if (response?.data?.statusCode === 200) {
+        set((state) => ({
+          countLikes: state.countLikes - 1,
+        }));
+      }
+      return response?.data?.statusCode;
     } catch (error) {
       console.error("Error liking product:", error);
     } finally {

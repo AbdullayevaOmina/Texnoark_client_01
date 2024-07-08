@@ -35,3 +35,13 @@ export const register = async (data: SignUp) => {
     throw error;
   }
 };
+
+// export const edit = async (data: SignUp, id: number) => {
+//   try {
+//     const response = await http.patch(`/users/update/${id}`, data);
+//     return response.status;
+//   } catch (error) {
+//     console.error("Register error:", error);
+//     throw error;
+//   }
+// };

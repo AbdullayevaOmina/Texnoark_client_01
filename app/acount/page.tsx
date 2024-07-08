@@ -40,6 +40,7 @@ const AccountPage = () => {
       fetchData();
     }
   }, [getUserData, userID]);
+  
 
   const tabList: Tab[] = useMemo(
     () => [
@@ -73,7 +74,7 @@ const AccountPage = () => {
             <div className="flex justify-between items-center">
               <div className="bg-gray-300 rounded-full w-15 h-15" />
               <div className="ml-3 flex-1">
-                <b className="block">
+                <b className="block text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">
                   {`${userData?.first_name ?? "Loading..."} ${
                     userData?.last_name ?? ""
                   }`}

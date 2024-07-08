@@ -119,7 +119,7 @@ const SingleProductPage = () => {
 
             {activeTab === "specs" ? (
               <div className="flex flex-col md:flex-row gap-5">
-                <div className="bg-[#f5f5f5] p-8 w-full md:w-[60%] rounded-lg">
+                <div className="bg-[#f5f5f5] p-8 w-full lg:w-[60%] rounded-lg">
                   {productData?.product_detail?.specs?.map(
                     (spec: { name: string; value: string }, index: number) => (
                       <div

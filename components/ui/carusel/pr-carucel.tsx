@@ -46,9 +46,9 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
   const isProductInWishlist = (productId: number) =>
     dataWishlist.some(
       (wishlistItem: WishlistItemData) =>
-        wishlistItem.product_id.id === productId
+        wishlistItem?.product_id?.id === productId
     );
-
+    
   return (
     <div>
       {Array.isArray(dataProducts) && dataProducts.length > 0 ? (

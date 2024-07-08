@@ -11,6 +11,7 @@ import { setDataFromCookie } from "@/helpers/cookie";
 import useWishlistStore from "@/store/wishlist-store";
 import { Product } from "@/types/product-types";
 import { useState } from "react";
+// import heart from "@/assets/images/heart.png";
 
 interface ProductCardProps {
   product: Product;
@@ -39,12 +40,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Add to cart logic here
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Statistik logic here
   };
 
   const monthlyPayment = (+product.price / 12).toFixed(2);
@@ -88,7 +87,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
           className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
           aria-label="Like"
         >
-          {!isLiked ? heartOutlineIcon : heartFullIcon}
+          {isLiked ? heartOutlineIcon : heartFullIcon}
         </button>
         <button
           onClick={handleStatistik}

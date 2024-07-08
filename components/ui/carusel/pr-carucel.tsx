@@ -9,24 +9,45 @@ import Link from "next/link";
 import "./pr-carucel.css";
 import { useEffect } from "react";
 import useProductStore from "@/store/products";
+import useWishlistStore from "@/store/wishlist-store";
+import { getDataFromCookie } from "@/helpers/cookie";
 
 interface ProductsCarouselProps {
   title: string;
 }
 
+interface WishlistItemData {
+  createdAt: string;
+  id: number;
+  lastUpdateAt: string;
+  product_id: {
+    id: number;
+  };
+  user_id: number;
+}
+
 const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
-  const { getAllProducts, dataProducts, isLoading } = useProductStore();
+  const { getAllProducts, dataProducts } = useProductStore();
+  const { getAllWishlist, dataWishlist } = useWishlistStore();
+  const user_id = getDataFromCookie("user_id");
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         await getAllProducts({ page: 1, limit: 100, search: "" });
+        await getAllWishlist(user_id);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     fetchProducts();
-  }, [getAllProducts]);
+  }, [getAllProducts, getAllWishlist]);
+
+  const isProductInWishlist = (productId: number) =>
+    dataWishlist.some(
+      (wishlistItem: WishlistItemData) =>
+        wishlistItem.product_id.id === productId
+    );
 
   return (
     <div>
@@ -59,7 +80,10 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
             >
               {dataProducts.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <ProductCard product={item} />
+                  <ProductCard
+                    product={item}
+                    like={isProductInWishlist(item.id)}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>

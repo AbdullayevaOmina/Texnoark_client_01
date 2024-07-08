@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import {
   addToCartIcon,
+  heartFullIcon,
   heartOutlineIcon,
   statistikIcon,
 } from "@/assets/icons/global";
@@ -9,12 +10,15 @@ import Image from "next/image";
 import { setDataFromCookie } from "@/helpers/cookie";
 import useWishlistStore from "@/store/wishlist-store";
 import { Product } from "@/types/product-types";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
+  like: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
+  const [isLiked, setIsLiked] = useState(like);
   const router = useRouter();
   const { likePost } = useWishlistStore();
 
@@ -25,36 +29,42 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    await likePost(product.id);
+    const resStatus: any = await likePost(product.id);
+    if (resStatus === 200) {
+      setIsLiked(false);
+    } else if (resStatus === 201) {
+      setIsLiked(true);
+    }
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Add to cart functionality here
+    // Add to cart logic here
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Statistik functionality here
+    // Statistik logic here
   };
 
   const monthlyPayment = (+product.price / 12).toFixed(2);
+  const productImage = product.images[0];
 
   return (
     <div
-      className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[240px] h-[350px] md:w-[260px] md:h-[380px] lg:w-[305px] lg:h-[420px] "
+      className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[230px] md:w-[260px] lg:w-[305px]"
       onClick={() => viewSingleProduct(product.id)}
     >
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-[230px]">
         <Image
-          src={product.images[0]}
+          src={productImage}
           alt={product.name}
           width={200}
-          height={200}
-          className="lg:h-[180px]"
+          height={230}
+          className="p h-[230px]"
         />
       </div>
-      <div className="grid gap-1 md:gap-2">
+      <div className="grid gap-1 md:gap-2 mt-3">
         <h3 className="text-[13px] md:text-[16px] text-gray-700">
           {product.name}
         </h3>
@@ -69,18 +79,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <button
           className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-3 py-2 md:px-6 md:py-3 text-[14px]"
           onClick={handleAddToCart}
+          aria-label="Add to Cart"
         >
           {addToCartIcon} <span className="hidden md:flex">Savat</span>
         </button>
         <button
           onClick={handleLike}
           className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
+          aria-label="Like"
         >
-          {heartOutlineIcon}
+          {!isLiked ? heartOutlineIcon : heartFullIcon}
         </button>
         <button
           onClick={handleStatistik}
           className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
+          aria-label="Statistics"
         >
           {statistikIcon}
         </button>

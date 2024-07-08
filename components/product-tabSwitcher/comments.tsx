@@ -1,64 +1,94 @@
 "use client";
 import { useEffect, useState } from "react";
 import { getDataFromCookie } from "@/helpers/cookie";
-import useCommenttStore from "@/store/comments";
+import useCommentStore from "@/store/comments";
 import TextArea from "antd/es/input/TextArea";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
+import { CommentData } from "@/types/comment-types";
+import { smileEmojiIcon } from "@/assets/icons/global";
 
 const CommentsTab = () => {
-  const prID = getDataFromCookie("product_id");
-  const { getCommnets } = useCommenttStore();
-  const [data, setData] = useState<any>();
+  const prID:any = getDataFromCookie("product_id");
+  const { getComments, countComment, dataComments, createComment } =
+    useCommentStore();
+  const [comment, setComment] = useState<string>("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
   useEffect(() => {
     async function getCm() {
-      const resData = await getCommnets(prID);
-      setData(resData);
+      await getComments(prID);
     }
     getCm();
-  }, []);
+  }, [prID, getComments]);
+
+  const handleEmojiSelect = (emoji: any) => {
+    setComment(comment + emoji.native);
+    setShowEmojiPicker(false);
+  };
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await createComment({
+      comment: comment,
+      product_id: +prID,
+    });
+    console.log("Comment submitted:", comment);
+  };
+
+  console.log(dataComments);
 
   return (
     <div className="w-full p-8 rounded-lg bg-white grid gap-3">
-      <h1>Hamma sharhlar, {data?.count || 0} sharh</h1>
-      <div className="border p-5 overflow-y-scroll">
-        <div className="grid gap-8">
-          <div className="border-b-2 pb-5">
+      <h1>Hamma sharhlar, {countComment || 0} sharh</h1>
+      <div className="h-[500px] border p-5 overflow-y-scroll">
+        {dataComments?.map((item: CommentData, i: number) => (
+          <div key={i} className="border-b-2 py-5">
             <div className="flex gap-10 items-center mb-3">
-              <b className="block">user name</b>
-              <small className="text-gray-400">20/04/2004</small>
+              <b className="block">
+                {item.user_id.first_name} {item.user_id.last_name}
+              </b>
+              <small className="text-gray-400">
+                {new Date(item.createdAt).toLocaleDateString()}
+              </small>
             </div>
-            <span>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
-              quo vitae, esse, accusantium numquam adipisci perspiciatis sunt,
-              harum incidunt nobis neque necessitatibus ipsam ab quos. Dicta
-              temporibus odit aperiam culpa exercitationem adipisci voluptate,
-              nisi vel corrupti sequi accusamus reiciendis voluptas?
-            </span>
+            <span>{item.comment}</span>
           </div>
-          <div className="border-b-2 pb-5">
-            <div className="flex gap-10 items-center mb-3">
-              <b className="block">user name</b>
-              <small className="text-gray-400">20/04/2004</small>
-            </div>
-            <span>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
-              quo vitae, esse, accusantium numquam adipisci perspiciatis sunt,
-              harum incidunt nobis neque necessitatibus ipsam ab quos. Dicta
-              temporibus odit aperiam culpa exercitationem adipisci voluptate,
-              nisi vel corrupti sequi accusamus reiciendis voluptas?
-            </span>
-          </div>
-        </div>
+        ))}
       </div>
       <div>
-        <form className="grid gap-2">
-          <TextArea rows={4} placeholder="Shu yerda o'z fikringizni yozing" />
-          <button
-            type="submit"
-            className="bg-[#FF6F14] text-white rounded-lg p-1"
-          >
-            Send
-          </button>
+        <form className="grid gap-2" onSubmit={handleSubmit}>
+          <TextArea
+            rows={4}
+            value={comment}
+            onChange={handleCommentChange}
+            placeholder="Shu yerda o'z fikringizni yozing"
+            className="text-[18px]"
+          />
+          <div className="flex justify-between gap-3 relative">
+            <button
+              type="button"
+              className="rounded-lg p-1 px-5 bg-[#f0f0f0]"
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            >
+              {smileEmojiIcon}
+            </button>
+            <div className="absolute z-50 top-10">
+              {showEmojiPicker && (
+                <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+              )}
+            </div>
+            <button
+              type="submit"
+              className="bg-[#FF6F14] text-white rounded-lg p-1 w-full"
+            >
+              Jo'natish
+            </button>
+          </div>
         </form>
       </div>
     </div>

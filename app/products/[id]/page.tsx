@@ -62,7 +62,7 @@ const SingleProductPage = () => {
                 </button>
                 <div className="flex gap-3 w-full justify-between my-4">
                   <button className="w-full h-[40px] bg-[#FF6F14] rounded-lg text-white font-bold text-[12px] flex justify-center items-center gap-3">
-                    Savatga qo ‘shish
+                    Savatga qo'shish
                   </button>
                   <Link
                     href="/xaridni-rasmiylashtirish"
@@ -100,7 +100,7 @@ const SingleProductPage = () => {
                   activeTab === "specs"
                     ? "bg-[#FF6F14] text-white"
                     : "bg-white text-black"
-                } rounded-lg font-bold text-[12px] flex justify-center items-center gap-3`}
+                } rounded-lg font-bold text-[12px] md:text-[14px] flex justify-center items-center gap-3`}
                 onClick={() => setActiveTab("specs")}
               >
                 Telfon xususiyatlari
@@ -110,7 +110,7 @@ const SingleProductPage = () => {
                   activeTab === "comments"
                     ? "bg-[#FF6F14] text-white"
                     : "bg-white text-black"
-                } rounded-lg font-bold text-[12px] flex justify-center items-center gap-3`}
+                } rounded-lg font-bold text-[12px] md:text-[14px] flex justify-center items-center gap-3`}
                 onClick={() => setActiveTab("comments")}
               >
                 Mijozlarni fikri

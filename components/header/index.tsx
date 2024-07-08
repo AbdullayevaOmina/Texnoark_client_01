@@ -14,8 +14,10 @@ import { useState } from "react";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
 import CategoryModal from "../ui/modals/Category";
+import useWishlistStore from "@/store/wishlist-store";
 
 const Header = () => {
+  const { countLikes } = useWishlistStore();
   const navs = [
     { title: "Biz haqimizda", path: "/about" },
     { title: "Yetkazib berish", path: "/delivery" },
@@ -128,7 +130,7 @@ const Header = () => {
           >
             {heartOutlineIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
-              6
+              {countLikes}
             </div>
           </Link>
           <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg">

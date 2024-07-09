@@ -12,8 +12,6 @@ const useCartStore = create<CartStoreState>((set) => ({
     set({ isLoading: true });
     try {
       const response = await http.get(`/carts/user/${id}`);
-      console.log(response);
-
       if (response.status === 200) {
         set({
           countCartPr: response.data.data.count,
@@ -54,8 +52,6 @@ const useCartStore = create<CartStoreState>((set) => ({
     set({ isLoading: true });
     try {
       const response = await http.delete(`/carts/delete/${id}`);
-      console.log(response);
-
       if (response.status === 200) {
         set((state) => ({
           dataCardPr: state.dataCardPr.filter((item) => item.id !== id),

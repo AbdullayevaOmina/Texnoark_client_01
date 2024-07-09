@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import {
   addToCartIcon,
+  checkIcon,
   heartFullIcon,
   heartOutlineIcon,
   statistikIcon,
@@ -19,17 +20,21 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isCart, setIsCart] = useState(false);
   const router = useRouter();
   const { likePost, dataWishlist } = useWishlistStore();
-  const { addToCart } = useCartStore();
+  const { dataCardPr, addToCart } = useCartStore();
 
   useEffect(() => {
     setIsLiked(
       dataWishlist.some(
-        (wishlistItem: any) => wishlistItem?.product_id?.id === product.id
+        (wishlistItem:any) => wishlistItem.product_id.id === product.id
       )
     );
-  }, [dataWishlist, product.id]);
+    setIsCart(
+      dataCardPr.some((cartItem) => cartItem.product_id.id === product.id)
+    );
+  }, [dataWishlist, dataCardPr, product.id]);
 
   const viewSingleProduct = (id: number) => {
     setDataFromCookie("product_id", id);
@@ -45,6 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart(product.id);
+    setIsCart(true);
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
@@ -60,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[220px] md:w-[250px] lg:w-[290px]"
       onClick={() => viewSingleProduct(product.id)}
     >
-      <div className="flex justify-center items-center h-[140px] md:h-[160px] lg:h-[190px] mb-3 overflow-hidden relative ">
+      <div className="flex justify-center items-center h-[140px] md:h-[160px] lg:h-[190px] mb-3 overflow-hidden relative">
         <Image
           src={productImage}
           alt={product.name}
@@ -86,7 +92,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           onClick={handleAddToCart}
           aria-label="Add to Cart"
         >
-          {addToCartIcon} <span className="hidden md:flex">Savat</span>
+          {addToCartIcon}
+          {isCart ? checkIcon : <span className="hidden md:flex">Savat</span>}
         </button>
         <button
           onClick={handleLike}

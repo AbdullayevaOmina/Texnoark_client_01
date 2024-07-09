@@ -12,14 +12,14 @@ const CartPage = () => {
     dataCardPr?.reduce((acc, item) => acc + +item.product_id.price, 0) || 0;
 
   const handledelete = async (id: number) => {
-    const resStatus = await deleteFromCart(id);
+    await deleteFromCart(id);
   };
 
   const confirm: PopconfirmProps["onConfirm"] = (e) => {
     console.log(e);
     message.success("Mahsulot olib tashlandi");
   };
-  
+
   return (
     <div className="mb-10">
       <div className="flex flex-col lg:flex-row gap-5 container my-5">
@@ -63,8 +63,8 @@ const CartPage = () => {
                       confirm(e);
                       handledelete(item.id);
                     }}
-                    okText="Yes"
-                    cancelText="No"
+                    okText="Ha"
+                    cancelText="Yo'q"
                   >
                     <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
                       {deleteIcon}

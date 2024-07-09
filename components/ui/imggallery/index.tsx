@@ -41,8 +41,8 @@ const ImgGallery: React.FC<ImgGalleryProps> = ({ productImages }) => {
               <Image
                 src={image}
                 alt={`Product Image ${index + 1}`}
-                width={100}
-                height={100}
+                layout="fill"
+                objectFit="contain"
               />
             </div>
           </SwiperSlide>

@@ -62,10 +62,12 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
               freeMode={true}
               breakpoints={{
                 0: { slidesPerView: 1, spaceBetween: 2 },
-                320: { slidesPerView: 2, spaceBetween: 5 },
+                321: { slidesPerView: 2, spaceBetween: 5 },
                 768: { slidesPerView: 3, spaceBetween: 10 },
-                1024: { slidesPerView: 4, spaceBetween: 10 },
-                1400: { slidesPerView: 5, spaceBetween: 10 },
+                1025: { slidesPerView: 4, spaceBetween: 10 },
+                1500: { slidesPerView: 5, spaceBetween: 10 },
+                1800: { slidesPerView: 6, spaceBetween: 10 },
+                2100: { slidesPerView: 7, spaceBetween: 10 },
               }}
             >
               {dataProducts.map((item) => (

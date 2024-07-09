@@ -60,13 +60,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[220px] md:w-[250px] lg:w-[290px]"
       onClick={() => viewSingleProduct(product.id)}
     >
-      <div className="flex justify-center items-center h-[140px] md:h-[160px] lg:h-[190px] mb-3">
+      <div className="flex justify-center items-center h-[140px] md:h-[160px] lg:h-[190px] mb-3 overflow-hidden relative ">
         <Image
           src={productImage}
           alt={product.name}
-          width={200}
-          height={200}
-          className=" h-auto w-auto"
+          layout="fill"
+          objectFit="contain"
         />
       </div>
 

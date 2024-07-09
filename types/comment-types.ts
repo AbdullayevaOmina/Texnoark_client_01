@@ -30,6 +30,6 @@ export interface CommentsStoreState {
   isLoading: boolean;
   totalCount: number;
   countComment: number;
-  getComments: (id: string) => Promise<number | undefined>;
+  getComments: (id: any) => Promise<number | undefined>;
   createComment: (comment: CreateComment) => Promise<number | undefined>;
 }

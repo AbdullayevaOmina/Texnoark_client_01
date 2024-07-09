@@ -9,8 +9,6 @@ import Link from "next/link";
 import "./pr-carucel.css";
 import { useEffect } from "react";
 import useProductStore from "@/store/products";
-import useWishlistStore from "@/store/wishlist-store";
-import { getDataFromCookie } from "@/helpers/cookie";
 
 interface ProductsCarouselProps {
   title: string;
@@ -28,7 +26,6 @@ interface WishlistItemData {
 
 const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
   const { getAllProducts, dataProducts } = useProductStore();
-  const { dataWishlist } = useWishlistStore();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,12 +37,6 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
     };
     fetchProducts();
   }, [getAllProducts]);
-
-  const isProductInWishlist = (productId: number) =>
-    dataWishlist.some(
-      (wishlistItem: WishlistItemData) =>
-        wishlistItem?.product_id?.id === productId
-    );
 
   return (
     <div>
@@ -78,10 +69,7 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
             >
               {dataProducts.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <ProductCard
-                    product={item}
-                    like={isProductInWishlist(item.id)}
-                  />
+                  <ProductCard product={item} />
                 </SwiperSlide>
               ))}
             </Swiper>

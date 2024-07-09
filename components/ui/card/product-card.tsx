@@ -10,18 +10,26 @@ import Image from "next/image";
 import { setDataFromCookie } from "@/helpers/cookie";
 import useWishlistStore from "@/store/wishlist-store";
 import { Product } from "@/types/product-types";
-import { useState } from "react";
-// import heart from "@/assets/images/heart.png";
+import { useState, useEffect } from "react";
+import useCartStore from "@/store/cart";
 
 interface ProductCardProps {
   product: Product;
-  like: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
-  const [isLiked, setIsLiked] = useState(like);
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const [isLiked, setIsLiked] = useState(false);
   const router = useRouter();
-  const { likePost } = useWishlistStore();
+  const { likePost, dataWishlist } = useWishlistStore();
+  const { addToCart } = useCartStore();
+
+  useEffect(() => {
+    setIsLiked(
+      dataWishlist.some(
+        (wishlistItem: any) => wishlistItem?.product_id?.id === product.id
+      )
+    );
+  }, [dataWishlist, product.id]);
 
   const viewSingleProduct = (id: number) => {
     setDataFromCookie("product_id", id);
@@ -30,20 +38,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const resStatus: any = await likePost(product.id);
-    if (resStatus === 200) {
-      setIsLiked(false);
-    } else if (resStatus === 201) {
-      setIsLiked(true);
-    }
+    const resStatus:any = await likePost(product.id);
+    setIsLiked(resStatus === 201);
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
+    addToCart(product.id)
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
     e.stopPropagation();
+    // Statistics logic here
   };
 
   const monthlyPayment = (+product.price / 12).toFixed(2);
@@ -60,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
           alt={product.name}
           width={200}
           height={230}
-          className="p h-[230px]"
+          className="h-[230px]"
         />
       </div>
       <div className="grid gap-1 md:gap-2 mt-3">
@@ -87,7 +93,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, like }) => {
           className="flex items-center justify-center gap-1 bg-[#f0f0f0] py-2 md:py-3 px-3 md:px-4 rounded-lg"
           aria-label="Like"
         >
-          {isLiked ? heartOutlineIcon : heartFullIcon}
+          {isLiked ? heartFullIcon : heartOutlineIcon}
         </button>
         <button
           onClick={handleStatistik}

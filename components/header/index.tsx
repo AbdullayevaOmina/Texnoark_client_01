@@ -16,9 +16,11 @@ import Image from "next/image";
 import CategoryModal from "../ui/modals/Category";
 import useWishlistStore from "@/store/wishlist-store";
 import { getDataFromCookie } from "@/helpers/cookie";
+import useCartStore from "@/store/cart";
 
 const Header = () => {
   const { countLikes, getAllWishlist } = useWishlistStore();
+  const { getCartPrs, countCartPr } = useCartStore();
   const navs = [
     { title: "Biz haqimizda", path: "/about" },
     { title: "Yetkazib berish", path: "/delivery" },
@@ -32,6 +34,7 @@ const Header = () => {
     const fetchProducts = async () => {
       try {
         await getAllWishlist(user_id);
+        await getCartPrs(user_id);
       } catch (error) {
         console.error(error);
       }
@@ -72,7 +75,7 @@ const Header = () => {
     {
       key: "1",
       label: (
-        <Link onClick={closeDrawer} href="signin">
+        <Link onClick={closeDrawer} href="/signin">
           Tizimga kirish
         </Link>
       ),
@@ -80,7 +83,7 @@ const Header = () => {
     {
       key: "2",
       label: (
-        <Link onClick={closeDrawer} href="signup">
+        <Link onClick={closeDrawer} href="/signup">
           Ro'yxatdan o'tish
         </Link>
       ),
@@ -88,7 +91,7 @@ const Header = () => {
     {
       key: "3",
       label: (
-        <Link onClick={closeDrawer} href="acount">
+        <Link onClick={closeDrawer} href="/acount">
           Acount
         </Link>
       ),
@@ -159,7 +162,7 @@ const Header = () => {
           >
             {cartIcon}
             <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
-              7
+              {countCartPr || 0}
             </div>
           </Link>
 
@@ -194,7 +197,7 @@ const Header = () => {
             >
               {heartOutlineIcon}
               <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
-                6
+                {countLikes || 0}
               </div>
             </Link>
             <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg w-full">
@@ -212,7 +215,7 @@ const Header = () => {
             >
               {cartIcon}
               <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">
-                7
+                {countCartPr || 0}
               </div>
             </Link>
 

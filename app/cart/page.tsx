@@ -1,16 +1,21 @@
+"use client";
 import { deleteIcon, heartOutlineIcon } from "@/assets/icons/global";
 import prImg from "@/assets/images/product-img.png";
 import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
+import useCartStore from "@/store/cart";
 import Image from "next/image";
 
 const CartPage = () => {
+  const { countCartPr, dataCardPr } = useCartStore();
+  console.log(dataCardPr);
+  
   return (
     <div className="mb-10">
       <div className="flex flex-col lg:flex-row gap-5 container my-5">
         <div className="w-[100%] lg:w-[80%] grid gap-3">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {dataCardPr?.map((item, index) => (
             <div
-              key={i}
+              key={index}
               className="bg-white rounded-lg p-5 px-1 sm:px-4 md:px-6 lg:px-10 flex justify-between pr-3 gap-3"
             >
               <Image
@@ -20,7 +25,7 @@ const CartPage = () => {
               />
               <div className="flex flex-col justify-between my-2">
                 <b className="text-[15px] md:text-[20px]">
-                  Apple iPhone 13 Pro 8/128 GB Moviy
+                  {item.product_id.name}
                 </b>
                 <div className="flex gap-4 md:gap-6 items-center">
                   <button className="p-[3px] px-3 md:p-2 md:px-4 text-red-600 rounded-lg border border-rose-600">
@@ -33,7 +38,9 @@ const CartPage = () => {
                 </div>
               </div>
               <div>
-                <b className="text-[16px] md:text-[20px]">14 699 999 so‘m</b>
+                <b className="text-[16px] md:text-[20px]">
+                  {item.product_id.price} so‘m
+                </b>
                 <div className="flex gap-3 justify-end mt-5">
                   <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
                     {deleteIcon}
@@ -46,16 +53,17 @@ const CartPage = () => {
             </div>
           ))}
         </div>
+
         <div className="w-[100%] lg:w-[30%] ">
           <div className="bg-white rounded-lg p-5 flex flex-col gap-3">
             <b className="block text-center text-[18px]">
               Sizning haridlaringiz
             </b>
             <div className="flex items-center gap-3">
-              <small>Mahsulotlar:</small> <b>6 ta</b>
+              <span>Mahsulotlar:</span> <b>{countCartPr} ta</b>
             </div>
             <div className="flex items-center gap-3">
-              <small>Jami summa:</small> <b>56 778 678 so'm</b>
+              <span>Jami summa:</span> <b>56 778 678 so'm</b>
             </div>
             <button className="w-full h-[46px] bg-[#FF6F14] rounded-lg text-white font-bold text-[14px] flex justify-center items-center gap-3">
               Xaridni rasmiylashtirish

@@ -9,15 +9,9 @@ export const login = async (data: SignIn) => {
 
     if (response.status === 201) {
       const { access_token, refresh_token } = response?.data?.data?.tokens;
-      const { email, first_name, last_name, id, phone_number } =
-        response?.data?.data?.data;
       setDataFromCookie("access_token", access_token);
       setDataFromCookie("refresh_token", refresh_token);
-      setDataFromCookie("first_name", first_name);
-      setDataFromCookie("last_name", last_name);
-      setDataFromCookie("user_id", id);
-      setDataFromCookie("phone_number", phone_number);
-      setDataFromCookie("email", email);
+      setDataFromCookie("user_id", response?.data?.data?.data?.id);
     }
     return response.status;
   } catch (error) {

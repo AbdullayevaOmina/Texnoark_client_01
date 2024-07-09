@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import type { MenuProps } from "antd";
-import { Dropdown, Drawer, Button } from "antd";
+import type { MenuProps, PopconfirmProps } from "antd";
+import { Dropdown, Drawer, Button, Popconfirm, message } from "antd";
 import {
   cartIcon,
   heartOutlineIcon,
@@ -9,16 +9,25 @@ import {
   statistikIcon,
   barsIcon,
   userIcon,
+  exitIcon,
 } from "@/assets/icons/global";
 import { useEffect, useState } from "react";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
 import CategoryModal from "../ui/modals/Category";
 import useWishlistStore from "@/store/wishlist-store";
-import { getDataFromCookie } from "@/helpers/cookie";
+import {
+  getDataFromCookie,
+  removeDataFromCookie,
+  setDataFromCookie,
+} from "@/helpers/cookie";
 import useCartStore from "@/store/cart";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+  const user_id = getDataFromCookie("user_id");
+  const [isUser, setIsUser] = useState(user_id ? true : false);
   const { countLikes, getAllWishlist } = useWishlistStore();
   const { getCartPrs, countCartPr } = useCartStore();
   const navs = [
@@ -27,8 +36,6 @@ const Header = () => {
     { title: "Shartnoma shartlari", path: "/contracts" },
     { title: "Bizning kafolatlar", path: "/assurances" },
   ];
-
-  const user_id = getDataFromCookie("user_id");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -53,6 +60,10 @@ const Header = () => {
     setDrawerVisible(false);
   };
 
+  const handelLikePage = () => {
+    setDrawerVisible(false);
+    setDataFromCookie("like_tab", 2);
+  };
   const handleLanguageChange = ({ key }: any) => {
     setLanguage(key);
   };
@@ -70,6 +81,19 @@ const Header = () => {
       label: "en",
     },
   ];
+
+  const logout = async () => {
+    setIsUser(false);
+    removeDataFromCookie("access_token");
+    removeDataFromCookie("refresh_token");
+    removeDataFromCookie("user_id");
+    router.push("/");
+  };
+
+  const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    console.log(e);
+    message.info("Hisobdan chiqildi");
+  };
 
   const authItems: MenuProps["items"] = [
     {
@@ -92,8 +116,31 @@ const Header = () => {
       key: "3",
       label: (
         <Link onClick={closeDrawer} href="/acount">
-          Acount
+          Profilim
         </Link>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Popconfirm
+          title="Chiqish"
+          description="Haqiqattan ham hisobdan chiqmoqchimisiz?"
+          onConfirm={(e) => {
+            confirm(e);
+            logout();
+          }}
+          okText="Ha"
+          cancelText="Yo'q"
+        >
+          <button
+            className={`${
+              isUser ? `flex items-center gap-3 text-[#d30e03]` : `hidden`
+            }`}
+          >
+            Chiqish {exitIcon}
+          </button>
+        </Popconfirm>
       ),
     },
   ];
@@ -142,7 +189,8 @@ const Header = () => {
         </div>
         <div className="hidden md:flex gap-5 ">
           <Link
-            href="/wishlist"
+            href="/acount"
+            onClick={handelLikePage}
             className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] rounded-lg"
           >
             {heartOutlineIcon}
@@ -191,9 +239,9 @@ const Header = () => {
         <div className=" grid gap-3 mt-8">
           <div className="flex gap-3">
             <Link
-              href="/wishlist"
+              href="/acount"
+              onClick={handelLikePage}
               className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[13px] px-[14px] w-full rounded-lg"
-              onClick={closeDrawer}
             >
               {heartOutlineIcon}
               <div className="w-[20px] h-[20px] bg-[#D55200] rounded-lg text-white text-[10px] flex justify-center items-center">

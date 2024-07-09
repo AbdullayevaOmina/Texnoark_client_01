@@ -24,7 +24,8 @@ interface Tab {
 }
 
 const AccountPage = () => {
-  const [activeTabID, setActiveTabID] = useState<number>(1);
+  const a = +getDataFromCookie("like_tab");
+  const [activeTabID, setActiveTabID] = useState<number>(a);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const { getUserData, userData } = useAccountStore();

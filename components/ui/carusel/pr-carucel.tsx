@@ -4,7 +4,7 @@ import ProductCard from "@/components/ui/card/product-card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Mousewheel, Thumbs } from "swiper/modules";
+import { Navigation, Mousewheel, Thumbs, FreeMode } from "swiper/modules";
 import Link from "next/link";
 import "./pr-carucel.css";
 import { useEffect } from "react";
@@ -55,16 +55,17 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
           </div>
           <div className="mx-5">
             <Swiper
-              modules={[Navigation, Mousewheel, Thumbs]}
+              modules={[Navigation, Mousewheel, Thumbs, FreeMode]}
               navigation
               spaceBetween={0}
               slidesPerView={4}
+              freeMode={true}
               breakpoints={{
                 0: { slidesPerView: 1, spaceBetween: 2 },
                 320: { slidesPerView: 2, spaceBetween: 5 },
                 768: { slidesPerView: 3, spaceBetween: 10 },
                 1024: { slidesPerView: 4, spaceBetween: 10 },
-                1900: { slidesPerView: 5, spaceBetween: 10 },
+                1400: { slidesPerView: 5, spaceBetween: 10 },
               }}
             >
               {dataProducts.map((item) => (

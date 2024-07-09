@@ -2,11 +2,13 @@
 import { deleteIcon, heartOutlineIcon } from "@/assets/icons/global";
 import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 import useCartStore from "@/store/cart";
-import { Button, message, Popconfirm, PopconfirmProps } from "antd";
+import useWishlistStore from "@/store/wishlist-store";
+import { message, Popconfirm, PopconfirmProps } from "antd";
 import Image from "next/image";
 
 const CartPage = () => {
   const { countCartPr, dataCardPr, deleteFromCart } = useCartStore();
+  const { likePost } = useWishlistStore();
   console.log(dataCardPr);
   const sum =
     dataCardPr?.reduce((acc, item) => acc + +item.product_id.price, 0) || 0;
@@ -18,6 +20,10 @@ const CartPage = () => {
   const confirm: PopconfirmProps["onConfirm"] = (e) => {
     console.log(e);
     message.success("Mahsulot olib tashlandi");
+  };
+
+  const handleLike = async (id: number) => {
+    // const res = await likePost(id)
   };
 
   return (
@@ -70,7 +76,10 @@ const CartPage = () => {
                       {deleteIcon}
                     </button>
                   </Popconfirm>
-                  <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
+                  <button
+                    className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg"
+                    // onClick={handleLike(item.product_id.id)}
+                  >
                     {heartOutlineIcon}
                   </button>
                 </div>

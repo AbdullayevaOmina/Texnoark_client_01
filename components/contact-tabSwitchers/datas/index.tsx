@@ -1,28 +1,25 @@
-import { getDataFromCookie } from "@/helpers/cookie";
-
+"use client";
+import useAccountStore from "@/store/acount";
 const Datas = () => {
-  const data = {
-    firstName: getDataFromCookie("first_name"),
-    lastName: getDataFromCookie("last_name"),
-    phone: getDataFromCookie("phone_number"),
-    email: getDataFromCookie("email"),
-  };
-
+  const { userData } = useAccountStore();
   return (
     <div className="flex flex-col justify-center gap-3 px-8 bg-white rounded-lg p-10">
       <b className="text-2xl">Shaxsiy malumotlar</b>
       <div className="flex items-center gap-3">
-        <b className="text-gray-400 text-base">Ism:</b> <b>{data.firstName}</b>
+        <b className="text-gray-400 text-base">Ism:</b>{" "}
+        <b>{userData?.first_name}</b>
       </div>
       <div className="flex items-center gap-3">
         <b className="text-gray-400 text-base">Familya:</b>{" "}
-        <b>{data.lastName}</b>
+        <b>{userData?.last_name}</b>
       </div>
       <div className="flex items-center gap-3">
-        <b className="text-gray-400 text-base">Tel:</b> <b>{data.phone}</b>
+        <b className="text-gray-400 text-base">Tel:</b>{" "}
+        <b>{userData?.phone_number}</b>
       </div>
       <div className="flex items-center gap-3">
-        <b className="text-gray-400 text-base">Email:</b> <b>{data.email}</b>
+        <b className="text-gray-400 text-base">Email:</b>{" "}
+        <b>{userData?.email}</b>
       </div>
     </div>
   );

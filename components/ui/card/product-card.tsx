@@ -38,13 +38,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const resStatus:any = await likePost(product.id);
+    const resStatus: any = await likePost(product.id);
     setIsLiked(resStatus === 201);
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    addToCart(product.id)
+    addToCart(product.id);
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
@@ -57,18 +57,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div
-      className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[230px] md:w-[260px] lg:w-[305px]"
+      className="bg-white rounded-lg p-4 md:p-6 flex flex-col justify-between cursor-pointer w-[220px] md:w-[250px] lg:w-[290px]"
       onClick={() => viewSingleProduct(product.id)}
     >
-      <div className="flex justify-center items-center h-[230px]">
+      <div className="flex justify-center items-center h-[140px] md:h-[160px] lg:h-[190px] mb-3">
         <Image
           src={productImage}
           alt={product.name}
           width={200}
-          height={230}
-          className="h-[230px]"
+          height={200}
+          className=" h-auto w-auto"
         />
       </div>
+
       <div className="grid gap-1 md:gap-2 mt-3">
         <h3 className="text-[13px] md:text-[16px] text-gray-700">
           {product.name}

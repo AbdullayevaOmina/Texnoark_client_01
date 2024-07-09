@@ -10,7 +10,7 @@ const Likes = () => {
       <div>
         {dataWishlist.length > 0 &&
           dataWishlist.map((item: any, i) => (
-            <ProductCard key={i} product={item?.product_id} like={true} />
+            <ProductCard key={i} product={item?.product_id} />
           ))}
       </div>
     </div>

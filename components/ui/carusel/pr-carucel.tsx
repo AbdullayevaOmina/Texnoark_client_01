@@ -61,9 +61,9 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
               slidesPerView={4}
               freeMode={true}
               breakpoints={{
-                0: { slidesPerView: 1, spaceBetween: 2 },
-                321: { slidesPerView: 2, spaceBetween: 5 },
-                768: { slidesPerView: 3, spaceBetween: 10 },
+                0: { slidesPerView: 1, spaceBetween: 0 },
+                475: { slidesPerView: 2, spaceBetween: 10 },
+                700: { slidesPerView: 3, spaceBetween: 10 },
                 1025: { slidesPerView: 4, spaceBetween: 10 },
                 1500: { slidesPerView: 5, spaceBetween: 10 },
                 1800: { slidesPerView: 6, spaceBetween: 10 },

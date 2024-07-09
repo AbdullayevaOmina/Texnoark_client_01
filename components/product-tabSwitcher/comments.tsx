@@ -51,30 +51,43 @@ const CommentsTab = () => {
 
   return (
     <div className="w-full p-8 rounded-lg bg-white grid gap-3">
-      <h1>Hamma sharhlar, {countComment || 0} sharh</h1>
-      <div className="h-[500px] border p-5 overflow-y-scroll">
-        {dataComments?.map((item: CommentData, i: number) => (
-          <div key={i} className="border-b-2 py-5">
-            <div className="flex gap-10 items-center mb-3">
-              <b className="block">
-                {item.user_id.first_name} {item.user_id.last_name}
-              </b>
-              <small className="text-gray-400">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </small>
-            </div>
-            <span>{item.comment}</span>
+      {dataComments.length > 0 ? (
+        <>
+          <h1>Hamma sharhlar, {countComment || 0} sharh</h1>
+          <div
+            className={`${
+              dataComments.length > 0 ? `h-[500px]` : `h-[30px]`
+            } border p-5 overflow-y-scroll`}
+          >
+            {dataComments?.map((item: CommentData, i: number) => (
+              <div key={i} className="border-b-2 py-5">
+                <div className="flex gap-10 items-center mb-3">
+                  <b className="block">
+                    {item.user_id.first_name} {item.user_id.last_name}
+                  </b>
+                  <small className="text-gray-400">
+                    {new Date(item.createdAt).toLocaleDateString()}
+                  </small>
+                </div>
+                <span>{item.comment}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <span className="text-gray-400 text-center">
+          Sharhlar hali mavjud emas
+        </span>
+      )}
+
       <div>
         <form className="grid gap-2" onSubmit={handleSubmit}>
           <TextArea
-            rows={4}
+            rows={2}
             value={comment}
             onChange={handleCommentChange}
-            placeholder="Shu yerda o'z fikringizni yozing"
-            className="text-[18px]"
+            placeholder="Shu yerda o'z fikringizni yozing..."
+            className="text-[18px] py-0 md:py-2"
           />
           <div className="flex justify-between gap-3 relative">
             <button

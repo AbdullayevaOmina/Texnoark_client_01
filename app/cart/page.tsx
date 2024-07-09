@@ -1,13 +1,24 @@
 "use client";
 import { deleteIcon, heartOutlineIcon } from "@/assets/icons/global";
-import prImg from "@/assets/images/product-img.png";
 import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 import useCartStore from "@/store/cart";
+import { Button, message, Popconfirm, PopconfirmProps } from "antd";
 import Image from "next/image";
 
 const CartPage = () => {
-  const { countCartPr, dataCardPr } = useCartStore();
+  const { countCartPr, dataCardPr, deleteFromCart } = useCartStore();
   console.log(dataCardPr);
+  const sum =
+    dataCardPr?.reduce((acc, item) => acc + +item.product_id.price, 0) || 0;
+
+  const handledelete = async (id: number) => {
+    const resStatus = await deleteFromCart(id);
+  };
+
+  const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    console.log(e);
+    message.success("Mahsulot olib tashlandi");
+  };
   
   return (
     <div className="mb-10">
@@ -19,9 +30,11 @@ const CartPage = () => {
               className="bg-white rounded-lg p-5 px-1 sm:px-4 md:px-6 lg:px-10 flex justify-between pr-3 gap-3"
             >
               <Image
-                src={prImg}
+                src={item?.product_id?.images[0]}
                 alt="img"
-                className="w-[108px] sm:w-[118px] md:w-[128px]"
+                width={100}
+                height={100}
+                className="w-[100px] sm:w-[115px] md:w-[120px] h-auto"
               />
               <div className="flex flex-col justify-between my-2">
                 <b className="text-[15px] md:text-[20px]">
@@ -39,12 +52,24 @@ const CartPage = () => {
               </div>
               <div>
                 <b className="text-[16px] md:text-[20px]">
-                  {item.product_id.price} so‘m
+                  {item.product_id.price}{" "}
+                  <span className="text-green-500">$</span>
                 </b>
                 <div className="flex gap-3 justify-end mt-5">
-                  <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
-                    {deleteIcon}
-                  </button>
+                  <Popconfirm
+                    title="Olib tashlash"
+                    description="Bu mahsulotni savatingizdan olib tashlamoqchimisiz?"
+                    onConfirm={(e) => {
+                      confirm(e);
+                      handledelete(item.id);
+                    }}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
+                      {deleteIcon}
+                    </button>
+                  </Popconfirm>
                   <button className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg">
                     {heartOutlineIcon}
                   </button>
@@ -63,7 +88,10 @@ const CartPage = () => {
               <span>Mahsulotlar:</span> <b>{countCartPr} ta</b>
             </div>
             <div className="flex items-center gap-3">
-              <span>Jami summa:</span> <b>56 778 678 so'm</b>
+              <span>Jami summa:</span>{" "}
+              <b>
+                {sum} <span className="text-green-400">$</span>
+              </b>
             </div>
             <button className="w-full h-[46px] bg-[#FF6F14] rounded-lg text-white font-bold text-[14px] flex justify-center items-center gap-3">
               Xaridni rasmiylashtirish

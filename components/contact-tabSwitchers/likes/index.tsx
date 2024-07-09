@@ -6,14 +6,14 @@ const Likes = () => {
   console.log(dataWishlist);
 
   return (
-    <div className="">
-      <div>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {dataWishlist.length > 0 &&
           dataWishlist.map((item: any, i) => (
             <ProductCard key={i} product={item?.product_id} />
           ))}
       </div>
-    </div>
+    </>
   );
 };
 

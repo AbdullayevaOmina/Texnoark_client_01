@@ -22,14 +22,14 @@ const useCartStore = create<CartStoreState>((set) => ({
       }
       return response.status;
     } catch (error) {
-      console.error("Error fetching comments:", error);
+      console.error("Error fetching cart products:", error);
       set({ totalCount: 0 });
     } finally {
       set({ isLoading: false });
     }
   },
 
-  addToCart: async (id) => {
+  addToCart: async (id: string) => {
     set({ isLoading: true });
     try {
       const response = await http.post(`/carts/create`, {
@@ -37,13 +37,34 @@ const useCartStore = create<CartStoreState>((set) => ({
       });
       if (response.status === 201) {
         set((state) => ({
-          dataComments: [...state.dataComments, response.data.data],
-          countComment: state.countComment + 1,
+          dataCardPr: [...state.dataCardPr, response.data.data],
+          countCartPr: state.countCartPr + 1,
         }));
       }
       return response.status;
     } catch (error) {
-      console.error("Error creating cart:", error);
+      console.error("Error adding to cart:", error);
+      set({ totalCount: 0 });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  deleteFromCart: async (id: number) => {
+    set({ isLoading: true });
+    try {
+      const response = await http.delete(`/carts/delete/${id}`);
+      console.log(response);
+
+      if (response.status === 200) {
+        set((state) => ({
+          dataCardPr: state.dataCardPr.filter((item) => item.id !== id),
+          countCartPr: state.countCartPr - 1,
+        }));
+      }
+      return response.status;
+    } catch (error) {
+      console.error("Error deleting from cart:", error);
       set({ totalCount: 0 });
     } finally {
       set({ isLoading: false });

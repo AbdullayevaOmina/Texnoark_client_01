@@ -68,12 +68,12 @@ const AccountPage = () => {
   return (
     <div className="container py-3 w-full">
       <div className="flex flex-col lg:flex-row gap-5 w-full">
-        <div className="w-full lg:w-1/3">
+        <div className="w-full lg:w-[25%]">
           <div className="p-3 sm:p-4 lg:p-5 px-6 bg-white rounded-lg">
             <div className="flex justify-between items-center">
               <div className="bg-gray-300 rounded-full w-15 h-15" />
               <div className="ml-3 flex-1">
-                <b className="block text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">
+                <b className="block text-[16px] sm:text-[18px] md:text-[20px] lg:text-[21px]">
                   {`${userData?.first_name ?? "Loading..."} ${
                     userData?.last_name ?? ""
                   }`}
@@ -114,7 +114,7 @@ const AccountPage = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/3">{activeTab && activeTab.tab}</div>
+        <div className="w-full lg:w-[75%]">{activeTab && activeTab.tab}</div>
       </div>
     </div>
   );

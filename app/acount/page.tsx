@@ -1,5 +1,4 @@
 "use client";
-
 import {
   editIcon,
   editIconOrange,
@@ -24,8 +23,8 @@ interface Tab {
 }
 
 const AccountPage = () => {
-  const a = +getDataFromCookie("like_tab");
-  const [activeTabID, setActiveTabID] = useState<number>(a);
+  const a = getDataFromCookie("like_tab") || 1;
+  const [activeTabID, setActiveTabID] = useState<any>(+a);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const { getUserData, userData } = useAccountStore();

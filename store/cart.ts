@@ -8,6 +8,17 @@ const useCartStore = create<CartStoreState>((set) => ({
   totalCount: 1,
   countCartPr: 0,
 
+  chengedata: async (data) => {
+    try {
+      set((state) => ({
+        dataCardPr: [...state.dataCardPr, data],
+        countCartPr: state.countCartPr + 1,
+      }));
+    } catch (error) {
+      console.error("Error fetching cart products:", error);
+    }
+  },
+
   getCartPrs: async (id: string) => {
     set({ isLoading: true });
     try {
@@ -33,12 +44,6 @@ const useCartStore = create<CartStoreState>((set) => ({
       const response = await http.post(`/carts/create`, {
         product_id: id,
       });
-      if (response.status === 201) {
-        set((state) => ({
-          dataCardPr: [...state.dataCardPr, response.data.data],
-          countCartPr: state.countCartPr + 1,
-        }));
-      }
       return response.status;
     } catch (error) {
       console.error("Error adding to cart:", error);

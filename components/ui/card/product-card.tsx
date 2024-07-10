@@ -9,9 +9,9 @@ import {
 } from "@/assets/icons/global";
 import Image from "next/image";
 import { setDataFromCookie } from "@/helpers/cookie";
-import useWishlistStore from "@/store/wishlist-store";
 import { Product } from "@/types/product-types";
 import { useState, useEffect } from "react";
+import useWishlistStore from "@/store/wishlist-store";
 import useCartStore from "@/store/cart";
 
 interface ProductCardProps {
@@ -23,12 +23,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isCart, setIsCart] = useState(false);
   const router = useRouter();
   const { likePost, dataWishlist } = useWishlistStore();
-  const { dataCardPr, addToCart } = useCartStore();
+  const { dataCardPr, addToCart, chengedata } = useCartStore();
 
   useEffect(() => {
     setIsLiked(
       dataWishlist.some(
-        (wishlistItem:any) => wishlistItem.product_id.id === product.id
+        (wishlistItem: any) => wishlistItem.product_id.id === product.id
       )
     );
     setIsCart(
@@ -45,17 +45,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.stopPropagation();
     const resStatus: any = await likePost(product.id);
     setIsLiked(resStatus === 201);
+
+    // if (resStatus === 20) {
+    //   setIsLiked(
+    //     dataWishlist.some(
+    //       (wishlistItem: any) => wishlistItem.product_id.id === product.id
+    //     )
+    //   );
+    // }
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    addToCart(product.id);
-    setIsCart(true);
+    const resStaus = await addToCart(product.id);
+    if (resStaus === 201) {
+      chengedata({ product_id: product });
+      setIsCart(
+        dataCardPr.some((cartItem) => cartItem.product_id.id === product.id)
+      );
+    }
   };
 
   const handleStatistik = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Statistics logic here
   };
 
   const monthlyPayment = (+product.price / 12).toFixed(2);
@@ -88,9 +100,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
       <div className="flex justify-between items-center mt-2 md:mt-3">
         <button
-          className="bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-3 py-2 md:px-6 md:py-3 text-[14px]"
-          onClick={handleAddToCart}
+          className={`bg-[#D55200] rounded-lg flex items-center gap-2 text-white px-3 py-2 md:px-6 md:py-3 text-[14px] ${
+            isCart && `opacity-40`
+          }`}
           aria-label="Add to Cart"
+          onClick={handleAddToCart}
+          disabled={isCart}
         >
           {addToCartIcon}
           {isCart ? checkIcon : <span className="hidden md:flex">Savat</span>}

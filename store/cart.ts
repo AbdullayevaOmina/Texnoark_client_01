@@ -11,7 +11,7 @@ const useCartStore = create<CartStoreState>((set) => ({
   chengedata: async (data) => {
     try {
       set((state) => ({
-        dataCardPr: [...state.dataCardPr, data],
+        dataCardPr: [...state.dataCardPr, { ...data, quantity: 1 }],
         countCartPr: state.countCartPr + 1,
       }));
     } catch (error) {
@@ -26,7 +26,10 @@ const useCartStore = create<CartStoreState>((set) => ({
       if (response.status === 200) {
         set({
           countCartPr: response.data.data.count,
-          dataCardPr: response.data.data.carts,
+          dataCardPr: response.data.data.carts.map((item: any) => ({
+            ...item,
+            quantity: 1,
+          })),
         });
       }
       return response.status;
@@ -70,6 +73,24 @@ const useCartStore = create<CartStoreState>((set) => ({
     } finally {
       set({ isLoading: false });
     }
+  },
+
+  incrementQuantity: (id) => {
+    set((state) => ({
+      dataCardPr: state.dataCardPr.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    }));
+  },
+
+  decrementQuantity: (id) => {
+    set((state) => ({
+      dataCardPr: state.dataCardPr.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      ),
+    }));
   },
 }));
 

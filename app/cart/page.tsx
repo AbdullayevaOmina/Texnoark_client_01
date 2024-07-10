@@ -1,29 +1,27 @@
 "use client";
-import { deleteIcon, heartOutlineIcon } from "@/assets/icons/global";
+import { deleteIcon } from "@/assets/icons/global";
 import ProductsCarucel from "@/components/ui/carusel/pr-carucel";
 import useCartStore from "@/store/cart";
-import useWishlistStore from "@/store/wishlist-store";
-import { message, Popconfirm, PopconfirmProps } from "antd";
+import { message, Popconfirm } from "antd";
 import Image from "next/image";
 
 const CartPage = () => {
-  const { countCartPr, dataCardPr, deleteFromCart } = useCartStore();
-  const { likePost } = useWishlistStore();
-  console.log(dataCardPr);
+  const {
+    countCartPr,
+    dataCardPr,
+    deleteFromCart,
+    incrementQuantity,
+    decrementQuantity,
+  } = useCartStore();
   const sum =
-    dataCardPr?.reduce((acc, item) => acc + +item.product_id.price, 0) || 0;
+    dataCardPr?.reduce(
+      (acc, item) => acc + item.product_id.price * item.quantity,
+      0
+    ) || 0;
 
-  const handledelete = async (id: number) => {
-    await deleteFromCart(id);
-  };
-
-  const confirm: PopconfirmProps["onConfirm"] = (e) => {
-    console.log(e);
-    message.success("Mahsulot olib tashlandi");
-  };
-
-  const handleLike = async (id: number) => {
-    // const res = await likePost(id)
+  const handleDelete = async (id: number) => {
+    const resStatus = await deleteFromCart(id);
+    resStatus === 200 && message.success("Mahsulot olib tashlandi");
   };
 
   return (
@@ -48,18 +46,24 @@ const CartPage = () => {
                   {item.product_id.name}
                 </b>
                 <div className="flex gap-4 md:gap-6 items-center">
-                  <button className="p-[3px] px-3 md:p-2 md:px-4 text-red-600 rounded-lg border border-rose-600">
+                  <button
+                    className="p-[3px] px-3 md:p-2 md:px-4 text-red-600 rounded-lg border border-rose-600"
+                    onClick={() => decrementQuantity(item.id)}
+                  >
                     -
                   </button>
-                  <b className="text-[14px] md:text-[18px]">1</b>
-                  <button className="p-[3px] px-3 md:p-2 md:px-4 text-green-600 rounded-lg border border-green-600">
+                  <b className="text-[14px] md:text-[18px]">{item.quantity}</b>
+                  <button
+                    className="p-[3px] px-3 md:p-2 md:px-4 text-green-600 rounded-lg border border-green-600"
+                    onClick={() => incrementQuantity(item.id)}
+                  >
                     +
                   </button>
                 </div>
               </div>
-              <div >
+              <div>
                 <b className="text-[16px] md:text-[20px]">
-                  {item.product_id.price}{" "}
+                  {item.product_id.price * item.quantity}{" "}
                   <span className="text-green-500">$</span>
                 </b>
                 <div className="flex gap-3 justify-end mt-5">
@@ -67,8 +71,7 @@ const CartPage = () => {
                     title="Olib tashlash"
                     description="Bu mahsulotni savatingizdan olib tashlamoqchimisiz?"
                     onConfirm={(e) => {
-                      confirm(e);
-                      handledelete(item.id);
+                      handleDelete(item.id);
                     }}
                     okText="Ha"
                     cancelText="Yo'q"
@@ -77,12 +80,6 @@ const CartPage = () => {
                       {deleteIcon}
                     </button>
                   </Popconfirm>
-                  <button
-                    className="flex items-center justify-center gap-[4px] bg-[#f0f0f0] py-[8px] px-[8px] md:py-[13px] md:px-[14px] rounded-lg"
-                    // onClick={handleLike(item.product_id.id)}
-                  >
-                    {heartOutlineIcon}
-                  </button>
                 </div>
               </div>
             </div>

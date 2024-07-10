@@ -5,7 +5,7 @@ interface WishlistStore {
   dataWishlist: any[];
   countLikes: number;
   isLoading: boolean;
-  getAllWishlist: (id: string) => Promise<void>;
+  getAllWishlist: (id: any) => Promise<void>;
   likePost: (id: number) => Promise<number | undefined>;
 }
 

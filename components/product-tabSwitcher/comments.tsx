@@ -7,8 +7,11 @@ import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { CommentData } from "@/types/comment-types";
 import { smileEmojiIcon } from "@/assets/icons/global";
+import { useRouter } from "next/navigation";
 
 const CommentsTab = () => {
+  const router = useRouter();
+  const token = getDataFromCookie("access_token");
   const prID: any = getDataFromCookie("product_id");
   const { getComments, countComment, dataComments, createComment } =
     useCommentStore();
@@ -36,16 +39,20 @@ const CommentsTab = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (prID) {
-      setIsSubmitting(true);
-      const resStatus = await createComment({
-        comment,
-        product_id: parseInt(prID, 10),
-      });
-      if (resStatus === 201) {
-        setComment("");
+    if (token) {
+      if (prID) {
+        setIsSubmitting(true);
+        const resStatus = await createComment({
+          comment,
+          product_id: parseInt(prID, 10),
+        });
+        if (resStatus === 201) {
+          setComment("");
+        }
+        setIsSubmitting(false);
       }
-      setIsSubmitting(false);
+    } else {
+      router.push("/signin");
     }
   };
 

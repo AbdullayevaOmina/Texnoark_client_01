@@ -8,7 +8,7 @@ import {
   statistikIcon,
 } from "@/assets/icons/global";
 import Image from "next/image";
-import { setDataFromCookie } from "@/helpers/cookie";
+import { getDataFromCookie, setDataFromCookie } from "@/helpers/cookie";
 import { Product } from "@/types/product-types";
 import { useState, useEffect } from "react";
 import useWishlistStore from "@/store/wishlist-store";
@@ -19,9 +19,10 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter();
+  const token = getDataFromCookie("access_token");
   const [isLiked, setIsLiked] = useState(false);
   const [isCart, setIsCart] = useState(false);
-  const router = useRouter();
   const { likePost, dataWishlist } = useWishlistStore();
   const { dataCardPr, addToCart, chengedata } = useCartStore();
 
@@ -43,26 +44,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const resStatus: any = await likePost(product.id);
-    setIsLiked(resStatus === 201);
-
-    // if (resStatus === 20) {
-    //   setIsLiked(
-    //     dataWishlist.some(
-    //       (wishlistItem: any) => wishlistItem.product_id.id === product.id
-    //     )
-    //   );
-    // }
+    if (token) {
+      const resStatus: any = await likePost(product.id);
+      if (resStatus === 201) setIsLiked(true);
+      else if (resStatus === 200) setIsLiked(false);
+    } else {
+      router.push("/signin");
+    }
   };
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const resStaus = await addToCart(product.id);
-    if (resStaus === 201) {
-      chengedata({ product_id: product });
-      setIsCart(
-        dataCardPr.some((cartItem) => cartItem.product_id.id === product.id)
-      );
+    if (token) {
+      const resStaus = await addToCart(product.id);
+      if (resStaus === 201) {
+        chengedata({ product_id: product });
+        setIsCart(
+          dataCardPr.some((cartItem) => cartItem.product_id.id === product.id)
+        );
+      }
+    } else {
+      router.push("/signin");
     }
   };
 

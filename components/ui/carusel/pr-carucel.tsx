@@ -43,32 +43,23 @@ const ProductsCarucel: React.FC<ProductsCarouselProps> = ({ title }) => {
       {Array.isArray(dataProducts) && dataProducts.length > 0 ? (
         <>
           <div className="container flex justify-between items-center my-3 sm:my-4 md:my-8 lg:my-10">
-            <b className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
+            <b className="text-[15px] sm:text-[20px] md:text-[26px] lg:text-[32px]">
               {title}
             </b>
             <Link
               href={"/products"}
-              className="text-[#1EB91E] border-[#1EB91E] bg-white border flex items-center rounded-lg px-[20px] py-[4px] sm:py-[6px] md:py-[8px] lg:py-[13px] gap-2 text-[12px] sm:text-[14px] md:text-[16px]"
+              className="text-[#1EB91E] border-[#1EB91E] bg-white border flex items-center rounded-lg px-[10px] sm:mx-[15px] md:mx-[20px] py-[4px] sm:py-[6px] md:py-[8px] lg:py-[13px] gap-2 text-[12px] sm:text-[14px] md:text-[16px]"
             >
               Hammasi {rightGreenIcon}
             </Link>
           </div>
-          <div className="mx-5">
+          <div className="mx-1 sm:mx-2 md:mx-3 lg:mx-5">
             <Swiper
               modules={[Navigation, Mousewheel, Thumbs, FreeMode]}
               navigation
-              spaceBetween={0}
-              slidesPerView={4}
               freeMode={true}
-              breakpoints={{
-                0: { slidesPerView: 1, spaceBetween: 0 },
-                475: { slidesPerView: 2, spaceBetween: 10 },
-                700: { slidesPerView: 3, spaceBetween: 10 },
-                1025: { slidesPerView: 4, spaceBetween: 10 },
-                1500: { slidesPerView: 5, spaceBetween: 10 },
-                1800: { slidesPerView: 6, spaceBetween: 10 },
-                2100: { slidesPerView: 7, spaceBetween: 10 },
-              }}
+              spaceBetween={15}
+              slidesPerView="auto"
             >
               {dataProducts.map((item) => (
                 <SwiperSlide key={item.id}>

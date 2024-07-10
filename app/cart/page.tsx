@@ -92,7 +92,7 @@ const CartPage = () => {
               Sizning haridlaringiz
             </b>
             <div className="flex items-center gap-3">
-              <span>Mahsulotlar:</span> <b>{countCartPr} ta</b>
+              <span>Mahsulot turi:</span> <b>{countCartPr} ta</b>
             </div>
             <div className="flex items-center gap-3">
               <span>Jami summa:</span>{" "}

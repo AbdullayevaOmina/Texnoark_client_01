@@ -5,7 +5,6 @@ import { Dropdown, Drawer, Button, Popconfirm, message } from "antd";
 import {
   cartIcon,
   heartOutlineIcon,
-  searchIcon,
   statistikIcon,
   barsIcon,
   userIcon,
@@ -23,6 +22,7 @@ import {
 } from "@/helpers/cookie";
 import useCartStore from "@/store/cart";
 import { useRouter } from "next/navigation";
+import GlobalSearch from "../ui/search";
 
 const Header = () => {
   const router = useRouter();
@@ -179,13 +179,7 @@ const Header = () => {
         </Link>
         <div className="hidden md:flex gap-5 w-full ml-20 mx-5">
           <CategoryModal />
-          <div className="relative w-full">
-            <input
-              placeholder="Хочу купить..."
-              className=" w-full h-[46px] bg-[#f0f0f0] rounded-lg px-5 outline-none text-[14px]"
-            />
-            <div className="absolute top-[15px] right-3">{searchIcon}</div>
-          </div>
+          <GlobalSearch />
         </div>
         <div className="hidden md:flex gap-5 ">
           <Link

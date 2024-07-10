@@ -9,20 +9,30 @@ import { getDataFromCookie } from "@/helpers/cookie";
 import useProductStore from "@/store/products";
 import { useEffect, useState } from "react";
 import CommentsTab from "@/components/product-tabSwitcher/comments";
+import { Flex, message, Rate } from "antd";
 
 const SingleProductPage = () => {
   const product_id = getDataFromCookie("product_id");
-  const { getProduct } = useProductStore();
+  const { getProduct, createRate } = useProductStore();
   const [productData, setProductData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState("specs");
+  const [value, setValue] = useState(0);
+  const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
   useEffect(() => {
     async function fetchProduct() {
-      const resData = await getProduct(product_id);
+      const resData: any = await getProduct(product_id);
       setProductData(resData);
+      setValue(+resData?.product?.rate);
     }
     fetchProduct();
   }, [product_id, getProduct]);
+
+  const handleRate = async (value: number) => {
+    await createRate({ product_id: product_id, rate: value });
+    setValue(value);
+    message.success("Mahsulotni baholaganingiz uchun rahmat!");
+  };
 
   return (
     <div className="my-5">
@@ -50,6 +60,7 @@ const SingleProductPage = () => {
                     )}
                   </div>
                 </div>
+
                 <div className="flex items-center gap-5 my-4 text-gray-500">
                   <small>Narx:</small>
                   <b className="text-[20px] text-black">
@@ -71,6 +82,9 @@ const SingleProductPage = () => {
                     Xarid qilish
                   </Link>
                 </div>
+                <Flex gap="middle" vertical className="my-5">
+                  <Rate tooltips={desc} onChange={handleRate} value={value} />
+                </Flex>
                 <div className="grid gap-2 text-[14px]">
                   <div className="flex items-center gap-4">
                     {furgonIcon}

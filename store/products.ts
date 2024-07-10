@@ -47,6 +47,18 @@ const useProductStore = create<ProductStoreState>((set) => ({
       set({ isLoading: false });
     }
   },
+
+  createRate: async (data) => {
+    set({ isLoading: true });
+    try {
+      const response = await http.post(`/products/rate`, data);
+    } catch (error) {
+      console.error("Error fetching rate:", error);
+      set({ totalCount: 0 });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
 
 export default useProductStore;

@@ -33,6 +33,28 @@ const useProductStore = create<ProductStoreState>((set) => ({
     }
   },
 
+  searchProducts: async (params: GetAll) => {
+    set({ isLoading: true });
+    try {
+      const response = await http.get(`/products/search`, {
+        params: {
+          page: params.page,
+          limit: params.limit,
+          search: params.search,
+        },
+      });
+
+      if (response.status === 200) {
+        const { count, products } = response?.data?.data;
+        return products
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      set({ totalCount: 0 });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
   getProduct: async (id) => {
     set({ isLoading: true });
     try {

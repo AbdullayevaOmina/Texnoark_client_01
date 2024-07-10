@@ -23,6 +23,7 @@ export interface ProductStoreState {
   isLoading: boolean;
   totalCount: number;
   getAllProducts: (params: GetAll) => Promise<void>;
+  searchProducts: (params: GetAll) => Promise<void>;
   getProduct: (id: any) => Promise<void>;
   createRate: (data: CreateRate) => Promise<void>;
 }

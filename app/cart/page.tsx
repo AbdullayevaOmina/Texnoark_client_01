@@ -34,12 +34,14 @@ const CartPage = () => {
               className="bg-white rounded-lg p-5 px-1 sm:px-4 md:px-6 lg:px-10 flex justify-between pr-3 gap-3"
             >
               <div className="w-[100px] sm:w-[115px] md:w-[120px] h-auto relative">
-                <Image
-                  src={item?.product_id?.images[0]}
-                  alt="img"
-                  layout="fill"
-                  objectFit="contain"
-                />
+                {item?.product_id?.images.length > 0 && (
+                  <Image
+                    src={item?.product_id?.images[0]}
+                    alt="img"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                )}
               </div>
               <div className="flex flex-col justify-between my-2">
                 <b className="text-[15px] md:text-[20px]">

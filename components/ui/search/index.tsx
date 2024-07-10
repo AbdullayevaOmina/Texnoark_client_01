@@ -8,17 +8,21 @@ const GlobalSearch = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const input_value = params.get("search");
-    setSearch(input_value ? input_value : "");
-  }, [window.location.search]);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const input_value = params.get("search");
+      setSearch(input_value ? input_value : "");
+    }
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
     setSearch(search);
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("search", search);
-    router.push(`?${searchParams.toString()}`);
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      searchParams.set("search", search);
+      router.push(`?${searchParams.toString()}`);
+    }
   };
 
   return (
